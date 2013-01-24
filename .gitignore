@@ -1,0 +1,14 @@
+composer.phar
+
+/app/config/parameters.yml
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+
+/vendor/*
+
+/web/bundles/*
+
+/DESIGN/
+
+.DS_Store
