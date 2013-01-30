@@ -1,6 +1,21 @@
 {% extends 'SweepoCoreBundle:Layouts:layout.html.twig' %}
 
-{% block body %}
-    <p>test</p>
-    <i class="icon icon-trophy"></i>
+{% block container %}{% endblock %}
+
+{% block sidebar %}
+    <div id="user">
+        <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded"/>
+        <p class="title">Rémy Gazelot</p>
+        <p class="screen_name">@remygazelot</p>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        'front/less/HistoryBundle/index.less'
+        filter='less,?yui_css'
+    %}
+
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
 {% endblock %}
