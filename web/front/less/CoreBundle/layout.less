@@ -1,29 +1,54 @@
 body {
     background: url('@{pathImages}/images/background.png') repeat top left;
+    font-family: "Helvetica Neue",Arial,sans-serif;
+}
+
+.h2 {
+    font-size: 21px;
+    color: @blue;
+    font-weight: bold;
 }
 
 #main_container {
     width:960px;
-    height:400px;
-    background: #fff;
+    background: url('@{pathImages}/images/container_background.png') repeat-y top left @white;
     margin: 0 auto;
     .box-shadow;
+    border-right:1px @white solid;
+    border-left:1px @white solid;
 
     #container {
-        width:603px;
-        height:400px;
-        background:url('@{pathImages}/images/container_background.png') repeat-y top left #fff;
+        width:523px;
+        padding:40px;
+        background: @white;
         float:left;
     }
 
     #sidebar {
+        height:100%;
         width:319px;
-        height:366px;
-        background: url('@{pathImages}/images/sidebar_background.png') repeat top left;
         float:left;
-        border-left:1px @blueBorder solid;
-        border-right:1px @white solid;
         padding: 18px;
     }
 }
+
+/* Tickets */
+.ticket_sub_green {
+    position:absolute;
+    top:-1px;
+    left:-1px;
+    height:56px;
+    width:6px;
+    .ticket(@ticketGreen);
+}
+
+.ticket_sub_red {
+    position:absolute;
+    top:-1px;
+    left:-1px;
+    height:56px;
+    width:6px;
+    .ticket;
+}
+
 
