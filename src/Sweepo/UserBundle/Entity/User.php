@@ -38,6 +38,13 @@ class User
     /**
      * @var string
      *
+     * @ORM\Column(name="token_secret", type="string", length=255)
+     */
+    private $token_secret;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="screen_name", type="string", length=255)
      */
     private $screen_name;
@@ -66,9 +73,9 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="language", type="string", length=255)
+     * @ORM\Column(name="lang", type="string", length=255)
      */
-    private $language;
+    private $lang;
 
     /**
      * @var \DateTime
@@ -77,6 +84,15 @@ class User
      */
     private $created_at;
 
+    public function __toString()
+    {
+        return $this->screen_name;
+    }
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
 
     /**
      * Get id
@@ -132,6 +148,29 @@ class User
     public function getToken()
     {
         return $this->token;
+    }
+
+    /**
+     * Set token_secret
+     *
+     * @param string $token_secret
+     * @return User
+     */
+    public function setTokenSecret($token_secret)
+    {
+        $this->token_secret = $token_secret;
+
+        return $this;
+    }
+
+    /**
+     * Get token_secret
+     *
+     * @return string
+     */
+    public function getTokenSecret()
+    {
+        return $this->token_secret;
     }
 
     /**
@@ -227,26 +266,26 @@ class User
     }
 
     /**
-     * Set language
+     * Set lang
      *
-     * @param string $language
+     * @param string $lang
      * @return User
      */
-    public function setLanguage($language)
+    public function setLang($lang)
     {
-        $this->language = $language;
+        $this->lang = $lang;
 
         return $this;
     }
 
     /**
-     * Get language
+     * Get lang
      *
      * @return string
      */
-    public function getLanguage()
+    public function getLang()
     {
-        return $this->language;
+        return $this->lang;
     }
 
     /**
@@ -270,5 +309,15 @@ class User
     public function getCreatedAt()
     {
         return $this->created_at;
+    }
+
+    /**
+     * Get roless
+     *
+     * @return string
+     */
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
     }
 }
