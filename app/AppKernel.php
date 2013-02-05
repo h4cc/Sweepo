@@ -20,8 +20,8 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Sweepo\CoreBundle\SweepoCoreBundle(),
-            new Sweepo\HistoryBundle\SweepoHistoryBundle(),
             new Sweepo\UserBundle\SweepoUserBundle(),
+            new Sweepo\StreamBundle\SweepoStreamBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

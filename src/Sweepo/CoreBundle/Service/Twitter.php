@@ -29,12 +29,9 @@ class Twitter
 
     public function getAccessToken($oauthVerifier)
     {
-        /* Create TwitteroAuth object with app key/secret and token key/secret from default phase */
         $connection = new \TwitterOAuth($this->consumerKey, $this->consumerSecret, $this->session->get('oauth_token'), $this->session->get('oauth_token_secret'));
 
-        /* Request access tokens from twitter */
         return $connection->getAccessToken($oauthVerifier);
-        // $connection = new \TwitterOAuth($this->consumerKey, $this->consumerSecret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
     }
 
     public function get($url, $parameters = [], $oauthToken, $oauthTokenSecret)

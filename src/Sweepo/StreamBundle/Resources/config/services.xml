@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="sweepo_history.example.class">Sweepo\HistoryBundle\Example</parameter>
+        <parameter key="sweepo_stream.example.class">Sweepo\StreamBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="sweepo_history.example" class="%sweepo_history.example.class%">
+        <service id="sweepo_stream.example" class="%sweepo_stream.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>

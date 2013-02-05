@@ -16,10 +16,7 @@ class SecurityController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function login(Request $request)
-    {
-
-    }
+    public function login(Request $request) {}
 
     /**
      * @Route("/login-check", name="login_check")
@@ -27,8 +24,7 @@ class SecurityController extends Controller
      */
     public function loginCheckAction(Request $request)
     {
-        return ['user' => $this->getUser()];
-        //return $this->redirect($request->server->get('HTTP_REFERER', $this->generateUrl('index')));
+        return $this->redirect($this->generateUrl('stream'));
     }
 
     /**

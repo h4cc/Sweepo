@@ -1,10 +1,10 @@
-sweepo_user:
-    resource: "@SweepoUserBundle/Controller/"
+sweepo_stream:
+    resource: "@SweepoStreamBundle/Controller/"
     type:     annotation
     prefix:   /
 
-sweepo_history:
-    resource: "@SweepoHistoryBundle/Controller/"
+sweepo_user:
+    resource: "@SweepoUserBundle/Controller/"
     type:     annotation
     prefix:   /
 

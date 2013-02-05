@@ -1,20 +1,20 @@
 <?php
 
-namespace Sweepo\HistoryBundle\Controller;
+namespace Sweepo\StreamBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
-class HistoryController extends Controller
+class StreamController extends Controller
 {
     /**
-     * @Route("/history")
+     * @Route("/stream", name="stream")
      * @Template()
      * @Secure("ROLE_USER")
      */
-    public function indexAction()
+    public function streamAction()
     {
         return array();
     }
