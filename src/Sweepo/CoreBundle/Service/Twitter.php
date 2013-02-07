@@ -2,7 +2,7 @@
 
 namespace Sweepo\CoreBundle\Service;
 
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class Twitter
 {
