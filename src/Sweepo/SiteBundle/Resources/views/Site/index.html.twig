@@ -1,0 +1,15 @@
+{% extends 'SweepoSiteBundle:Layouts:layout.html.twig' %}
+
+{% block container %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        'front/less/SiteBundle/index.less'
+        filter='less,?yui_css'
+    %}
+
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}

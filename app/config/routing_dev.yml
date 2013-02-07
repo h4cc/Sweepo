@@ -1,6 +1,6 @@
 _welcome:
     pattern:  /
-    defaults: { _controller: SweepoCoreBundle:Core:home }
+    defaults: { _controller: SweepoSiteBundle:Site:index }
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
