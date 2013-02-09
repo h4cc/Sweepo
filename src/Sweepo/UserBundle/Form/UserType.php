@@ -10,8 +10,8 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text', ['read_only' => true, 'required' => true]);
-        $builder->add('email', 'text', ['required' => true]);
+        $builder->add('email', 'text', ['required' => true, 'label' => 'Please enter your email']);
+        $builder->add('name', 'hidden');
         $builder->add('token', 'hidden');
         $builder->add('token_secret', 'hidden');
         $builder->add('screen_name', 'hidden');
