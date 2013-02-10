@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="sweepo.twitter.class">Sweepo\CoreBundle\Service\Twitter</parameter>
+        <parameter key="sweepo.locale.listener.class">Sweepo\CoreBundle\Listener\LocaleListener</parameter>
     </parameters>
 
     <services>
@@ -13,6 +14,12 @@
             <argument>%consumer_key%</argument>
             <argument>%consumer_secret%</argument>
             <argument type="service" id="session" />
+        </service>
+        <service id="sweepo.locale.listener" class="%sweepo.locale.listener.class%" scope="request">
+            <argument type="service" id="session" />
+            <argument type="service" id="request" />
+            <argument type="service" id="security.context" />
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="-32"/>
         </service>
     </services>
 </container>

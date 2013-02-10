@@ -64,6 +64,8 @@ class TwitterListener implements ListenerInterface
 
                 if (false !== $authToken = $this->twitterProvider->authenticate($twitterUserToken)) {
                     $this->securityContext->setToken($authToken);
+                    $this->session->set('_locale', $authToken->getLocale());
+                    $this->container->get('request')->setLocale($authToken->getLocale());
 
                     return;
                 }

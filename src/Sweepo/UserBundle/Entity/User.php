@@ -73,9 +73,9 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="lang", type="string", length=255)
+     * @ORM\Column(name="local", type="string", length=255)
      */
-    private $lang;
+    private $local;
 
     /**
      * @var \DateTime
@@ -266,26 +266,26 @@ class User
     }
 
     /**
-     * Set lang
+     * Set local
      *
-     * @param string $lang
+     * @param string $local
      * @return User
      */
-    public function setLang($lang)
+    public function setLocal($local)
     {
-        $this->lang = $lang;
+        $this->local = $local;
 
         return $this;
     }
 
     /**
-     * Get lang
+     * Get local
      *
      * @return string
      */
-    public function getLang()
+    public function getLocal()
     {
-        return $this->lang;
+        return $this->local;
     }
 
     /**

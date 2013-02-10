@@ -16,7 +16,7 @@ class SiteController extends Controller
      * @Route("/", name="index")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return [];
     }
@@ -41,7 +41,7 @@ class SiteController extends Controller
             $user->setScreenName($informations->screen_name);
             $user->setTwitterId($informations->id);
             $user->setProfileImageUrl($informations->profile_image_url);
-            $user->setLang($informations->lang);
+            $user->setLocal($informations->lang);
         }
 
         $form = $this->createForm(new UserType(), $user);

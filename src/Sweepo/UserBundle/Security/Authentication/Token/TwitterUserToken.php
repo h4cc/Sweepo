@@ -8,6 +8,7 @@ class TwitterUserToken extends AbstractToken
 {
     protected $twitterToken;
     protected $twitterTokenSecret;
+    protected $locale;
 
     public function __construct(array $roles = array())
     {
@@ -40,5 +41,15 @@ class TwitterUserToken extends AbstractToken
     public function getTwitterTokenSecret()
     {
         return $this->twitterTokenSecret;
+    }
+
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }

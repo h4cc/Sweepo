@@ -16,7 +16,7 @@ class TwitterProvider implements AuthenticationProviderInterface
 {
     private $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, $session)
     {
         $this->em = $em;
     }
@@ -28,6 +28,7 @@ class TwitterProvider implements AuthenticationProviderInterface
         if (null !== $user) {
             $authenticatedToken = new TwitterUserToken($user->getRoles());
             $authenticatedToken->setUser($user);
+            $authenticatedToken->setLocale($user->getLocal());
 
             return $authenticatedToken;
         }
