@@ -28,7 +28,9 @@ class SiteController extends Controller
     public function createAction(Request $request)
     {
         if (null === $request->query->get('oauth_token') || null === $request->query->get('oauth_token_secret')) {
-            // TODO
+            $this->get('session')->getFlashBag()->add('error', 'error');
+
+            return $this->redirect($this->generateUrl('index'));
         }
 
         $user = new User();

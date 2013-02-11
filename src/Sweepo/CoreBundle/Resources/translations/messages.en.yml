@@ -1,5 +1,8 @@
 # General
+error : "An error occured"
 
+# Twitter
+twitter_error: "An error occured with Twitter, please try later"
 
 # Site
 connect_twitter: "Connect with Twitter"

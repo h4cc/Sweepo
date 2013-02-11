@@ -1,6 +1,15 @@
 {% extends 'SweepoSiteBundle:Layouts:layout.html.twig' %}
 
 {% block container %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="flash alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Error !</h4>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
     <div id="container_introduction">
         <h1>Ne ratez plus jamais ce qui se dit</h1>
         <p>

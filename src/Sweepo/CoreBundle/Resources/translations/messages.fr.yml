@@ -1,5 +1,8 @@
 # General
+error : "Une erreur est survenue"
 
+# Twitter
+twitter_error: "Une erreur est survenue avec Twitter, réessayez plus tard"
 
 # Site
 connect_twitter: "Connexion avec Twitter"

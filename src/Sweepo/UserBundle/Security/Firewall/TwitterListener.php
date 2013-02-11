@@ -27,6 +27,14 @@ class TwitterListener implements ListenerInterface
     private $container;
     private $twitterProvider;
 
+    /**
+     * @param SecurityContextInterface       $securityContext
+     * @param AuthenticationManagerInterface $authenticationManager
+     * @param Twitter                        $twitter
+     * @param [type]                         $session
+     * @param ContainerInterface             $container
+     * @param TwitterProvider                $twitterProvider
+     */
     public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, Twitter $twitter, $session, ContainerInterface $container, TwitterProvider $twitterProvider)
     {
         $this->securityContext = $securityContext;
@@ -38,6 +46,10 @@ class TwitterListener implements ListenerInterface
         $this->twitterProvider = $twitterProvider;
     }
 
+    /**
+     * @param  GetResponseEvent $event
+     * @return
+     */
     public function handle(GetResponseEvent $event)
     {
         if (null !== $this->securityContext->getToken() || ($event->getRequest()->attributes->get('_route') !== 'login' && $event->getRequest()->attributes->get('_route') !== 'login_check')) {
@@ -53,7 +65,8 @@ class TwitterListener implements ListenerInterface
                 $oauthVerifier = $this->container->get('request')->get('oauth_verifier');
 
                 if (null === $oauthVerifier) {
-                    // TODO
+                    $this->session->getFlashBag()->add('error', 'twitter_error');
+                    $event->setResponse(new RedirectResponse($this->container->get('router')->generate('index')));
                 }
 
                 $accessToken = $this->twitter->getAccessToken($oauthVerifier);
