@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="sweepo.twitter.listener.class">Sweepo\UserBundle\Security\Firewall\TwitterListener</parameter>
         <parameter key="sweepo.twitter.provider.class">Sweepo\UserBundle\Security\Provider\TwitterProvider</parameter>
+        <parameter key="sweepo.logout.handler.class">Sweepo\UserBundle\Security\Firewall\LogoutHandler</parameter>
     </parameters>
 
     <services>
@@ -22,6 +23,11 @@
             <argument type="service" id="session" />
             <argument type="service" id="service_container" />
             <argument type="service" id="twitter.security.authentication.provider" />
+        </service>
+
+        <service id="sweepo.logout.handler" class="%sweepo.logout.handler.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="security.context" />
         </service>
     </services>
 

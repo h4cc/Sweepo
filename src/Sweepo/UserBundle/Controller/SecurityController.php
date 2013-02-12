@@ -24,4 +24,9 @@ class SecurityController extends Controller
     {
         return $this->redirect($this->generateUrl('stream'));
     }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout() {}
 }

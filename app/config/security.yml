@@ -23,3 +23,8 @@ security:
 
             form_login:
                 login_path:  /
+
+            logout:
+                path: /logout
+                target: /
+                success_handler: sweepo.logout.handler
