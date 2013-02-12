@@ -25,6 +25,19 @@
     </head>
     <body>
 
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    {% if app.user and is_granted('ROLE_USER') %}
+                        <a href="" id="login" class="btn btn-primary"><i class="icon icon-user icon-margin"></i>{{ 'logout' | trans }}</a>
+                    {% else %}
+                        <a href="{{ path('login') }}" id="login" class="btn btn-primary"><i class="icon icon-twitter icon-margin"></i>{{ 'login' | trans }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
         <div id="main_container" class="clearfix">
             <div id="container">
                 {% block container %}{% endblock %}

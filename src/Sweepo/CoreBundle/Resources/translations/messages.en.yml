@@ -1,5 +1,7 @@
 # General
 error : "An error occured"
+login: "Login"
+logout: "Logout"
 
 # Twitter
 twitter_error: "An error occured with Twitter, please try later"

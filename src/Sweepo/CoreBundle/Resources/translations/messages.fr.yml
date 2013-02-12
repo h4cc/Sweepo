@@ -1,5 +1,7 @@
 # General
 error : "Une erreur est survenue"
+login: "Se connecter"
+logout: "Se déconnecter"
 
 # Twitter
 twitter_error: "Une erreur est survenue avec Twitter, réessayez plus tard"
