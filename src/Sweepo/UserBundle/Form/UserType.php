@@ -17,7 +17,7 @@ class UserType extends AbstractType
         $builder->add('screen_name', 'hidden');
         $builder->add('twitter_id', 'hidden');
         $builder->add('profile_image_url', 'hidden');
-        $builder->add('lang', 'hidden');
+        $builder->add('local', 'hidden');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

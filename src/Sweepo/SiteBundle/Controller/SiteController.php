@@ -56,7 +56,7 @@ class SiteController extends Controller
                 $em->persist($user);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('index'));
+                return $this->redirect($this->generateUrl('stream'));
             }
         }
 

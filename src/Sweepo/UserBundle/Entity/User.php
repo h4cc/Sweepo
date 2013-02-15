@@ -84,6 +84,13 @@ class User
      */
     private $created_at;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="api_key", type="string", length=255)
+     */
+    private $api_key;
+
     public function __toString()
     {
         return $this->screen_name;
@@ -92,6 +99,7 @@ class User
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->api_key = hash('md5', uniqid(true));
     }
 
     /**
@@ -309,6 +317,29 @@ class User
     public function getCreatedAt()
     {
         return $this->created_at;
+    }
+
+    /**
+     * Set api_key
+     *
+     * @param string $api_key
+     * @return User
+     */
+    public function setApiKey($api_key)
+    {
+        $this->api_key = $api_key;
+
+        return $this;
+    }
+
+    /**
+     * Get api_key
+     *
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->api_key;
     }
 
     /**

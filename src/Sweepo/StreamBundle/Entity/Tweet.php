@@ -52,9 +52,9 @@ class Tweet
     /**
      * @var string
      *
-     * @ORM\Column(name="in_reply-to-screen-name", type="string", length=255)
+     * @ORM\Column(name="in_reply_to_screen_name", type="string", length=255, nullable=true)
      */
-    private $in_reply-to-screen-name;
+    private $in_reply_to_screen_name;
 
     /**
      * @var integer
@@ -89,12 +89,12 @@ class Tweet
      *
      * @ORM\Column(name="is_retweeted", type="boolean")
      */
-    private $is_retweeted;
+    private $is_retweeted = false;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="raw_user_screen_name", type="string", length=255)
+     * @ORM\Column(name="raw_user_screen_name", type="string", length=255, nullable=true)
      */
     private $raw_user_screen_name;
 
@@ -105,11 +105,15 @@ class Tweet
      */
     private $created_at;
 
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -125,14 +129,14 @@ class Tweet
     public function setUser($user)
     {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return string 
+     * @return string
      */
     public function getUser()
     {
@@ -148,14 +152,14 @@ class Tweet
     public function setTweetId($tweetId)
     {
         $this->tweet_id = $tweetId;
-    
+
         return $this;
     }
 
     /**
      * Get tweet_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getTweetId()
     {
@@ -171,14 +175,14 @@ class Tweet
     public function setText($text)
     {
         $this->text = $text;
-    
+
         return $this;
     }
 
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -194,14 +198,14 @@ class Tweet
     public function setTweetCreatedAt($tweetCreatedAt)
     {
         $this->tweet_created_at = $tweetCreatedAt;
-    
+
         return $this;
     }
 
     /**
      * Get tweet_created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTweetCreatedAt()
     {
@@ -209,26 +213,26 @@ class Tweet
     }
 
     /**
-     * Set in_reply-to-screen-name
+     * Set in_reply_to_screen_name
      *
      * @param string $inReplyToScreenName
      * @return Tweet
      */
     public function setInReplyToScreenName($inReplyToScreenName)
     {
-        $this->in_reply-to-screen-name = $inReplyToScreenName;
-    
+        $this->in_reply_to_screen_name = $inReplyToScreenName;
+
         return $this;
     }
 
     /**
-     * Get in_reply-to-screen-name
+     * Get in_reply_to_screen_name
      *
-     * @return string 
+     * @return string
      */
     public function getInReplyToScreenName()
     {
-        return $this->in_reply-to-screen-name;
+        return $this->in_reply_to_screen_name;
     }
 
     /**
@@ -240,14 +244,14 @@ class Tweet
     public function setOwnerId($ownerId)
     {
         $this->owner_id = $ownerId;
-    
+
         return $this;
     }
 
     /**
      * Get owner_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getOwnerId()
     {
@@ -263,14 +267,14 @@ class Tweet
     public function setOwnerName($ownerName)
     {
         $this->owner_name = $ownerName;
-    
+
         return $this;
     }
 
     /**
      * Get owner_name
      *
-     * @return string 
+     * @return string
      */
     public function getOwnerName()
     {
@@ -286,14 +290,14 @@ class Tweet
     public function setOwnerScreenName($ownerScreenName)
     {
         $this->owner_screen_name = $ownerScreenName;
-    
+
         return $this;
     }
 
     /**
      * Get owner_screen_name
      *
-     * @return string 
+     * @return string
      */
     public function getOwnerScreenName()
     {
@@ -309,14 +313,14 @@ class Tweet
     public function setOwnerProfileImageUrl($ownerProfileImageUrl)
     {
         $this->owner_profile_image_url = $ownerProfileImageUrl;
-    
+
         return $this;
     }
 
     /**
      * Get owner_profile_image_url
      *
-     * @return string 
+     * @return string
      */
     public function getOwnerProfileImageUrl()
     {
@@ -332,14 +336,14 @@ class Tweet
     public function setIsRetweeted($isRetweeted)
     {
         $this->is_retweeted = $isRetweeted;
-    
+
         return $this;
     }
 
     /**
      * Get is_retweeted
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsRetweeted()
     {
@@ -355,14 +359,14 @@ class Tweet
     public function setRawUserScreenName($rawUserScreenName)
     {
         $this->raw_user_screen_name = $rawUserScreenName;
-    
+
         return $this;
     }
 
     /**
      * Get raw_user_screen_name
      *
-     * @return string 
+     * @return string
      */
     public function getRawUserScreenName()
     {
@@ -378,14 +382,14 @@ class Tweet
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
