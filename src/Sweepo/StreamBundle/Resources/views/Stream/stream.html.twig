@@ -276,18 +276,13 @@
 {% block javascript %}
     {{ parent() }}
 
-    <script type="text/javascript">
-        // $(function(){
-        //     $('.hightlight').on('click', function() {
-        //         var val = $(this).attr('data-scroll');
-        //         console.log(val);
-        //         var yValue = $('#anchor_' + val).scrollTop();
-        //         console.log(yValue);
-        //         window.scrollTo( 0, yValue) ;
-        //         return false;
-        //     });
-        // });
-    </script>
+    {% javascripts
+        'front/js/StreamBundle/stream.js'
+        filter='yui_js'
+    %}
+
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 {% block stylesheets %}

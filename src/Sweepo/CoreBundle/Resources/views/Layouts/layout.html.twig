@@ -48,8 +48,14 @@
         </div>
 
         {% block javascript %}
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-            <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+            {% javascripts
+                'components/jquery/jquery.js'
+                'components/underscore/underscore.js'
+                'components/backbone/backbone.js'
+                filter='yui_js'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
         {% endblock %}
 
     </body>
