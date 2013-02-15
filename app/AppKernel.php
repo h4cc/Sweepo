@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Sweepo\UserBundle\SweepoUserBundle(),
             new Sweepo\StreamBundle\SweepoStreamBundle(),
             new Sweepo\SiteBundle\SweepoSiteBundle(),
+            new Sweepo\ApiBundle\SweepoApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

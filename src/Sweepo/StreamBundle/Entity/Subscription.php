@@ -35,11 +35,30 @@ class Subscription
      */
     private $created_at;
 
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
+
+    public function toArray($short = true)
+    {
+        $array = [
+            'id'           => $this->id,
+            'subscription' => $this->subscription,
+            'created_at'   => $this->created_at,
+        ];
+
+        if (!$short) {
+            $array = array_merge($array, []);
+        }
+
+        return $array;
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,14 +74,14 @@ class Subscription
     public function setSubscription($subscription)
     {
         $this->subscription = $subscription;
-    
+
         return $this;
     }
 
     /**
      * Get subscription
      *
-     * @return string 
+     * @return string
      */
     public function getSubscription()
     {
@@ -78,14 +97,14 @@ class Subscription
     public function setCreatedAt($createdAt)
     {
         $this->created_at = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {

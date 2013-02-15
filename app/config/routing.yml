@@ -1,3 +1,8 @@
+sweepo_api:
+    resource: "@SweepoApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 sweepo_site:
     resource: "@SweepoSiteBundle/Controller/"
     type:     annotation
