@@ -3,6 +3,9 @@
 namespace Sweepo\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Sweepo\StreamBundle\Entity\Subscription;
 
 /**
  * User
@@ -91,6 +94,11 @@ class User
      */
     private $api_key;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Subscription", mappedBy="user")
+     */
+    private $subscriptions;
+
     public function __toString()
     {
         return $this->screen_name;
@@ -100,6 +108,31 @@ class User
     {
         $this->created_at = new \DateTime();
         $this->api_key = hash('md5', uniqid(true));
+        $this->subscriptions = new ArrayCollection();
+    }
+
+    public function toArray($short = true)
+    {
+        $array = [
+            'id'          => $this->id,
+            'screen_name' => $this->screen_name,
+            'name'        => $this->name,
+        ];
+
+        if (!$short) {
+            $array = array_merge($array, [
+                'email'             => $this->email,
+                'token'             => $this->token,
+                'token_secret'      => $this->token_secret,
+                'local'             => $this->local,
+                'created_at'        => $this->created_at,
+                'api_key'           => $this->api_key,
+                'twitter_id'        => $this->twitter_id,
+                'profile_image_url' => $this->profile_image_url,
+            ]);
+        }
+
+        return $array;
     }
 
     /**
@@ -350,5 +383,21 @@ class User
     public function getRoles()
     {
         return ['ROLE_USER'];
+    }
+
+    public function addSubscription(Subscription $subscription)
+    {
+        $subscription->setUser($this);
+        $this->subscriptions->add($subscription);
+    }
+
+    /**
+     * Get subscriptions
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
     }
 }
