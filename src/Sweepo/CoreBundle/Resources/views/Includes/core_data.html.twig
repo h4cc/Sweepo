@@ -1,0 +1,9 @@
+<script type="text/javascript">
+    var core_data = {
+        {% if user is defined %}
+          user_screen_name: '{{ user.screenName }}'
+        , user_api_key: '{{ user.apiKey }}'
+        ,
+        {% endif %}
+    };
+</script>

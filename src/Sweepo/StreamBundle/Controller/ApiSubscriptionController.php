@@ -17,7 +17,7 @@ use Sweepo\StreamBundle\Entity\Subscription;
 class ApiSubscriptionController extends Controller
 {
     /**
-     * @Route("", name="api_subscriptions")
+     * @Route("", name="api_subscriptions", options={"expose"=true})
      * @Method({"GET", "POST", "OPTIONS"})
      */
     public function subscription(Request $request)
@@ -60,7 +60,7 @@ class ApiSubscriptionController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="api_subscriptions_get")
+     * @Route("/{id}", name="api_subscriptions_get", options={"expose"=true})
      * @Method({"GET", "OPTIONS"})
      */
     public function getSubscription(Request $request, $id)

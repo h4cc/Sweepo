@@ -233,43 +233,20 @@
 {% block sidebar %}
     <div id="user">
         <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded"/>
-        <p class="title">Rémy Gazelot</p>
+        <p class="title">{{ user.name }}</p>
         <p class="screen_name">@remygazelot</p>
     </div>
     <div id="subscriptions">
         <div id="title_subscriptions" class="h2">Subscriptions</div>
         <form>
             <input id="input_subscription" type="text" placeholder="find ..."/>
-            <input type="submit" class="btn btn-success">
+            <input id="submit_subscription" type="submit" class="btn btn-success">
         </form>
         <ul id="list_subscriptions">
-            <li class="subscription">
-                <span class="ticket_sub_red"></span>
-                <i class="icon icon-trophy icon_margin"></i>
-                Blablablabla
-            </li>
-            <li class="subscription">
-                <span class="ticket_sub_red"></span>
-                <i class="icon icon-trophy icon_margin"></i>
-                Blablablabla
-            </li>
-            <li class="subscription" id="anchor_abc">
-                <span class="ticket_sub_red"></span>
-                <i class="icon icon-trophy icon_margin"></i>
-                Blablablabla
-            </li>
-            <li class="subscription">
-                <span class="ticket_sub_red"></span>
-                <i class="icon icon-trophy icon_margin"></i>
-                Blablablabla
-            </li>
-            <li class="subscription">
-                <span class="ticket_sub_red"></span>
-                <i class="icon icon-trophy icon_margin"></i>
-                Blablablabla
-            </li>
         </ul>
     </div>
+
+    {% include "SweepoStreamBundle:TemplatesJS:subscriptions.html.twig" %}
 
 {% endblock %}
 
@@ -277,7 +254,7 @@
     {{ parent() }}
 
     {% javascripts
-        'front/js/StreamBundle/stream.js'
+        'front/js/StreamBundle/subscription.js'
         filter='yui_js'
     %}
 

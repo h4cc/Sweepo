@@ -16,6 +16,8 @@ class StreamController extends Controller
      */
     public function streamAction()
     {
-        return array();
+        return [
+            'user' => $this->getUser(),
+        ];
     }
 }

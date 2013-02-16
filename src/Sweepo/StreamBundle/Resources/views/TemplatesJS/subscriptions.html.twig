@@ -1,0 +1,9 @@
+<script type="text/template" id="subscription_template">
+    <% _.each(subscriptions, function(subscription) { %>
+        <li class="subscription">
+            <span class="ticket_sub_red"></span>
+            <i class="icon icon-trophy icon_margin"></i>
+            <%= subscription.subscription %>
+        </li>
+    <% }); %>
+</script>
