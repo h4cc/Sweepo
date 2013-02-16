@@ -5,6 +5,8 @@ namespace Sweepo\ApiBundle\Listener;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 use Sweepo\ApiBundle\Response\ApiResponse;
 use Sweepo\ApiBundle\Authentication\ApiLogin;
@@ -17,12 +19,21 @@ class ApiListener
      */
     private $apiResponse;
 
+    /**
+     * @var Sweepo\ApiBundle\Authentication\ApiLogin
+     */
     private $apiLogin;
 
-    public function __construct(ApiResponse $apiResponse, ApiLogin $apiLogin)
+    /**
+     * @var Symfony\Component\Security\Core\SecurityContextInterface
+     */
+    private $security;
+
+    public function __construct(ApiResponse $apiResponse, ApiLogin $apiLogin, SecurityContextInterface $security)
     {
         $this->apiResponse = $apiResponse;
         $this->apiLogin = $apiLogin;
+        $this->security = $security;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -49,6 +60,10 @@ class ApiListener
             if (false === $user = $this->apiLogin->checkToken($token)) {
                 return $event->setResponse($this->apiResponse->errorResponse('User not found', ErrorCode::USER_NOT_FOUND, 200));
             }
+
+            // Login
+            $roles = $user->getRoles();
+            $this->security->setToken(new UsernamePasswordToken($user, null, 'main', $roles));
         }
     }
 

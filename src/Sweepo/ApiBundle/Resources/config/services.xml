@@ -14,6 +14,7 @@
         <service id="sweepo.api.listener" class="%sweepo.api.listener.class%">
             <argument type="service" id="sweepo.api.response" />
             <argument type="service" id="sweepo.api.login" />
+            <argument type="service" id="security.context" />
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="-8"/>
         </service>
         <service id="sweepo.api.response" class="%sweepo.api.response.class%">
