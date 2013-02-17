@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subscription
 {
+    const TYPE_KEYWORD = 'keyword';
+    const TYPE_USER = 'user';
+
     /**
      * @var integer
      *
@@ -35,6 +38,13 @@ class Subscription
      * @ORM\Column(name="subscription", type="string", length=255)
      */
     private $subscription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
 
     /**
      * @var \DateTime
@@ -97,6 +107,35 @@ class Subscription
     public function getSubscription()
     {
         return $this->subscription;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $subscription
+     * @return Subscription
+     */
+    public function setType($subscription)
+    {
+        if('@' === substr($subscription, 0, 1)) {
+            $this->type = self::TYPE_USER;
+
+            return $this;
+        }
+
+        $this->type = self::TYPE_KEYWORD;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

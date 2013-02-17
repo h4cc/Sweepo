@@ -29,7 +29,7 @@ class ApiSubscriptionController extends Controller
                 $subscriptions = $em->getRepository('SweepoStreamBundle:Subscription')->findBy(['user' => $this->getUser()]);
 
                 if (empty($subscriptions)) {
-                    return $this->get('sweepo.api.response')->errorResponse('Subscription not found', ErrorCode::SUBSCRIPTION_NOT_FOUND, 404);
+                    return $this->get('sweepo.api.response')->errorResponse('Subscription not found', ErrorCode::SUBSCRIPTION_NOT_FOUND, 200);
                 }
 
                 array_walk($subscriptions, function (Subscription &$subscription) {
@@ -46,7 +46,7 @@ class ApiSubscriptionController extends Controller
                     return $this->get('sweepo.api.response')->errorResponse('Subscription is a missing mandatory parameter', ErrorCode::INVALID_PARAMETER, 400);
                 }
 
-                $newSubscription = (new Subscription())->setSubscription($subscription);
+                $newSubscription = (new Subscription())->setSubscription($subscription)->setType($subscription);
                 $user = $this->getUser();
                 $user->addSubscription($newSubscription);
 
@@ -61,16 +61,23 @@ class ApiSubscriptionController extends Controller
 
     /**
      * @Route("/{id}", name="api_subscriptions_get", options={"expose"=true})
-     * @Method({"GET", "OPTIONS"})
+     * @Method({"GET", "DELETE", "OPTIONS"})
      */
     public function getSubscription(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         if (null === $subscription = $em->getRepository('SweepoStreamBundle:Subscription')->find($id)) {
-            return $this->get('sweepo.api.response')->errorResponse('Subscription not found', ErrorCode::SUBSCRIPTION_NOT_FOUND, 404);
+            return $this->get('sweepo.api.response')->errorResponse('Subscription not found', ErrorCode::SUBSCRIPTION_NOT_FOUND, 200);
         }
 
-        return $this->get('sweepo.api.response')->successResponse($subscription->toArray());
+        switch ($request->getMethod()) {
+            case 'GET':
+                return $this->get('sweepo.api.response')->successResponse($subscription->toArray());
+            break;
+
+            case 'DELETE':
+                // TODO
+            break;
+        }
     }
 }

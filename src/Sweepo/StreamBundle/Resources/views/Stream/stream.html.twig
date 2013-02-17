@@ -234,14 +234,15 @@
     <div id="user">
         <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded"/>
         <p class="title">{{ user.name }}</p>
-        <p class="screen_name">@remygazelot</p>
+        <p class="screen_name">@{{ user.screenName }}</p>
     </div>
     <div id="subscriptions">
-        <div id="title_subscriptions" class="h2">Subscriptions</div>
+        <div id="title_subscriptions" class="h2">{{ 'subscriptions' | trans }}</div>
         <form>
-            <input id="input_subscription" type="text" placeholder="find ..."/>
-            <input id="submit_subscription" type="submit" class="btn btn-success">
+            <input id="input_subscription" type="text" placeholder="{{ 'add_subscription' | trans }}"/>
+            <input id="submit_subscription" type="submit" class="btn btn-success" value="{{ 'add' | trans }}">
         </form>
+        <div id="info_subscription" class="alert alert-info"><span></span> {{ 'added' | trans }}</div>
         <ul id="list_subscriptions">
         </ul>
     </div>

@@ -2,9 +2,15 @@
 error : "An error occured"
 login: "Login"
 logout: "Logout"
+add: "Add"
+added: 'added !'
 
 # Twitter
 twitter_error: "An error occured with Twitter, please try later"
 
 # Site
 connect_twitter: "Connect with Twitter"
+
+# Stream
+subscriptions: "Subscriptions"
+add_subscription: "Add a subscription"
