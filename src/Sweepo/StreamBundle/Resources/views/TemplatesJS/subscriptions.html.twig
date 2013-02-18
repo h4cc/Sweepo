@@ -1,9 +1,11 @@
 <script type="text/template" id="subscription_template">
     <% _.each(subscriptions, function(subscription) { %>
-        <li class="subscription">
-            <span class="ticket_sub_red"></span>
+        <li id="<%= subscription.id %>" class="subscription">
+            <span class="<%= subscription.type === 'keyword' ?  'ticket_sub_green' : 'ticket_sub_red' %>"></span>
             <i class="icon icon-trophy icon_margin"></i>
             <%= subscription.subscription %>
+            <i class="icon icon-remove-circle"></i>
+            <button class="btn btn-danger delete_subscription">Delete ?</button>
         </li>
     <% }); %>
 </script>

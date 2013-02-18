@@ -143,13 +143,22 @@
     }
 
     #input_subscription {
-        width: 202px;
+        width: 184px;
         margin:0 4px 0 0;
     }
 
     #list_subscriptions {
         list-style:none;
         margin:0;
+
+        #spin_list_subscriptions {
+            text-align: center;
+            font-size:24px;
+        }
+    }
+
+    #no_subscriptions {
+        display:none;
     }
 
     .subscription {
@@ -161,9 +170,23 @@
         line-height:55px;
         padding-left:15px;
         margin-bottom: 8px;
+        overflow: hidden;
 
         i {
             font-size:16px;
+        }
+
+        .icon-remove-circle {
+            position:absolute;
+            top:19px;
+            right:10px;
+            cursor:pointer;
+        }
+
+        button {
+            position: absolute;
+            top: 12px;
+            right: -82px;
         }
     }
 

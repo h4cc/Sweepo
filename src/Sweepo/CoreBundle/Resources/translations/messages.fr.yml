@@ -14,3 +14,4 @@ connect_twitter: "Connexion avec Twitter"
 # Stream
 subscriptions: "Abonnements"
 add_subscription: "Ajoutez un abonnement"
+no_subscriptions: "Il n'y a pas d'abonnements"

@@ -64,6 +64,7 @@ class Subscription
             'id'           => $this->id,
             'subscription' => $this->subscription,
             'created_at'   => $this->created_at,
+            'type'         => $this->type,
             'user'         => $this->user->toArray(),
         ];
 

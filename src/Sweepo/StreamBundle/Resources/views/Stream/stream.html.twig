@@ -240,11 +240,13 @@
         <div id="title_subscriptions" class="h2">{{ 'subscriptions' | trans }}</div>
         <form>
             <input id="input_subscription" type="text" placeholder="{{ 'add_subscription' | trans }}"/>
-            <input id="submit_subscription" type="submit" class="btn btn-success" value="{{ 'add' | trans }}">
+            <button id="submit_subscription" class="btn btn-success"><i class="icon icon-plus icon-margin"></i>{{ 'add' | trans }}</button>
         </form>
-        <div id="info_subscription" class="alert alert-info"><span></span> {{ 'added' | trans }}</div>
+        <div id="info_subscription" class="alert alert-info"><i class="icon icon-info-sign icon-margin"></i><span></span> {{ 'added' | trans }}</div>
         <ul id="list_subscriptions">
+            <li id="spin_list_subscriptions"><i class="icon icon-spin icon-spinner"></i></li>
         </ul>
+        <div id="no_subscriptions" class="alert alert-info"><i class="icon icon-info-sign icon-margin"></i>{{ 'no_subscriptions' | trans }}</div>
     </div>
 
     {% include "SweepoStreamBundle:TemplatesJS:subscriptions.html.twig" %}
