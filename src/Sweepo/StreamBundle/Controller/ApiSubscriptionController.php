@@ -29,7 +29,7 @@ class ApiSubscriptionController extends Controller
                 $subscriptions = $em->getRepository('SweepoStreamBundle:Subscription')->findBy(['user' => $this->getUser()]);
 
                 if (empty($subscriptions)) {
-                    return $this->get('sweepo.api.response')->errorResponse('Subscription not found', ErrorCode::SUBSCRIPTION_NOT_FOUND, 200);
+                    return $this->get('sweepo.api.response')->errorResponse('Subscription not found', ErrorCode::SUBSCRIPTION_NOT_FOUND, 404);
                 }
 
                 array_walk($subscriptions, function (Subscription &$subscription) {
@@ -67,7 +67,7 @@ class ApiSubscriptionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         if (null === $subscription = $em->getRepository('SweepoStreamBundle:Subscription')->find($id)) {
-            return $this->get('sweepo.api.response')->errorResponse('Subscription not found', ErrorCode::SUBSCRIPTION_NOT_FOUND, 200);
+            return $this->get('sweepo.api.response')->errorResponse('Subscription not found', ErrorCode::SUBSCRIPTION_NOT_FOUND, 404);
         }
 
         switch ($request->getMethod()) {
@@ -76,7 +76,10 @@ class ApiSubscriptionController extends Controller
             break;
 
             case 'DELETE':
-                // TODO
+                $em->remove($subscription);
+                $em->flush();
+
+                return $this->get('sweepo.api.response')->successResponse([]);
             break;
         }
     }

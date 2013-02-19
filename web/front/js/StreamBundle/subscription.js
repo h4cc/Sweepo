@@ -22,14 +22,13 @@ $(function(){
                 type : 'GET',
                 url: Routing.generate('api_subscriptions') + '?token=' + core_data.user_api_key,
                 success: function(data) {
-                    if ('success' in data) {
-                        $('#no_subscriptions').hide();
-                        self.collection.add(data.success);
-                        self.render();
-                    } else if ('error' in data) {
-                        $('#list_subscriptions').empty();
-                        $('#no_subscriptions').show();
-                    }
+                    $('#no_subscriptions').hide();
+                    self.collection.add(data.success);
+                    self.render();
+                },
+                error: function(data) {
+                    $('#list_subscriptions').empty();
+                    $('#no_subscriptions').show();
                 }
             });
 
@@ -63,6 +62,10 @@ $(function(){
                     currentTarget.children('i').removeClass('icon-spinner icon-spin').addClass('icon-plus');
                     self.collection.add(data.success);
                     self.showInfo(data.success.subscription);
+                },
+                error: function(data) {
+                    currentTarget.children('i').removeClass('icon-spinner icon-spin').addClass('icon-plus');
+                    self.showError();
                 }
             });
 
@@ -70,14 +73,31 @@ $(function(){
         },
 
         deleteSubscription : function(event) {
+            var self = this;
             var id = $(event.currentTarget).parent('.subscription').attr('id');
             var subscription = this.collection.get(id);
-            this.collection.remove(subscription);
+
+            $.ajax({
+                type : 'DELETE',
+                url: Routing.generate('api_subscriptions_get', {'id':id}) + '?token=' + core_data.user_api_key,
+                success: function(data) {
+                    $(event.currentTarget).parent('.subscription').animate({marginLeft:'1000px'}, {'duration':1000, 'queue':false}, function() {
+                        self.collection.remove(subscription);
+                    }).fadeOut(600);
+                },
+                error: function(data) {
+                    self.showError();
+                }
+            });
         },
 
         showInfo : function(subscription) {
             $('#info_subscription > span').html(subscription);
             $('#info_subscription').show().delay(4000).fadeOut();
+        },
+
+        showError : function() {
+            $('#error_subscription').show().delay(4000).fadeOut();
         },
 
         showDelete : function(event) {
