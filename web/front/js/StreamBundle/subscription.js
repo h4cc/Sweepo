@@ -11,7 +11,7 @@ $(function(){
 
     window.SubscriptionsCollectionView = Backbone.View.extend({
 
-        el : $('#subscriptions'),
+        el : $('body'),
 
         initialize : function() {
             var self = this;
@@ -23,12 +23,12 @@ $(function(){
                 url: Routing.generate('api_subscriptions') + '?token=' + core_data.user_api_key,
                 success: function(data) {
                     if ('success' in data) {
-                        self.$('#no_subscriptions').hide();
+                        $('#no_subscriptions').hide();
                         self.collection.add(data.success);
                         self.render();
                     } else if ('error' in data) {
-                        self.$('#list_subscriptions').empty();
-                        self.$('#no_subscriptions').show();
+                        $('#list_subscriptions').empty();
+                        $('#no_subscriptions').show();
                     }
                 }
             });
@@ -40,21 +40,27 @@ $(function(){
 
         events : {
             'click #submit_subscription' : 'addSubscription',
+            'click #submit_form_dropdown_add_subscription' : 'addSubscription',
             'click .icon-remove-circle' : 'showDelete',
             'click .delete_subscription' : 'deleteSubscription'
         },
 
-        addSubscription : function(e) {
+        addSubscription : function(event) {
             var self = this;
-            e.preventDefault();
-            this.$('#submit_subscription').children('i').removeClass('icon-plus').addClass('icon-spinner icon-spin');
+            var currentTarget = $(event.currentTarget);
+
+            // Prevent the default dehavior of the submit button
+            event.preventDefault();
+
+            // Spinner on the add button
+            currentTarget.children('i').removeClass('icon-plus').addClass('icon-spinner icon-spin');
 
             $.ajax({
                 type : 'POST',
-                data : {'subscription': this.$('#input_subscription').val()},
+                data : {'subscription': currentTarget.prev().val()},
                 url: Routing.generate('api_subscriptions') + '?token=' + core_data.user_api_key,
                 success: function(data) {
-                    self.$('#submit_subscription').children('i').removeClass('icon-spinner icon-spin').addClass('icon-plus');
+                    currentTarget.children('i').removeClass('icon-spinner icon-spin').addClass('icon-plus');
                     self.collection.add(data.success);
                     self.showInfo(data.success.subscription);
                 }
@@ -80,7 +86,7 @@ $(function(){
 
         render : function() {
             var renderedContent = this.template({ subscriptions : this.collection.toJSON() });
-            $(this.el).children('#list_subscriptions').html(renderedContent);
+            $('#list_subscriptions').html(renderedContent);
             return this;
         }
     });

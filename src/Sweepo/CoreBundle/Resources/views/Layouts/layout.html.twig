@@ -26,14 +26,34 @@
     <body>
 
         <!-- Navbar -->
-        <div class="navbar">
+        <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    {% if app.user and is_granted('ROLE_USER') %}
-                        <a href="{{ path('logout') }}" id="login" class="btn btn-primary"><i class="icon icon-user icon-margin"></i>{{ 'logout' | trans }}</a>
-                    {% else %}
-                        <a href="{{ path('login') }}" id="login" class="btn btn-primary"><i class="icon icon-twitter icon-margin"></i>{{ 'login' | trans }}</a>
-                    {% endif %}
+
+                    <!-- Add subscription -->
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a id="add_subscription" class="dropdown-toggle area_dropdown" role="button" data-toggle="dropdown" href="#">
+                                <i class="icon icon-edit"></i>
+                            </a>
+                            <ul id="dropdown_add_subscription" class="dropdown-menu pull-left" role="menu" aria-labelledby="add_subscription">
+                                <li>
+                                    <form id="form_dropdown_add_subscription">
+                                        <input type="text" placeholder="{{ 'add_subscription' | trans }}"/>
+                                        <button id="submit_form_dropdown_add_subscription" class="btn btn-success"><i class="icon icon-plus"></i>{{ 'add' | trans }}</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- Manager account -->
+                    <div id="disconnect_user">
+                        <a id="disconnect_toggle" href="#">
+                            <i class="icon icon-off"></i>
+                        </a>
+                        <a href="{{ path('logout') }}" id="disconnect" class="btn btn-primary">{{ 'logout' | trans }}</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,6 +78,8 @@
                 'components/jquery/jquery.js'
                 'components/underscore/underscore.js'
                 'components/backbone/backbone.js'
+                'components/bootstrap/js/bootstrap-dropdown.js'
+                'front/js/CoreBundle/layout.js'
                 filter='yui_js'
             %}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
