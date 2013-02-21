@@ -32,16 +32,15 @@ $(function(){
                 }
             });
 
-            _.bindAll(this, 'render');
-            this.collection.bind('add', this.render);
-            this.collection.bind('remove', this.render);
+            this.listenTo(this.collection, 'add', this.render);
+            this.listenTo(this.collection, 'remove', this.render);
         },
 
         events : {
-            'click #submit_subscription' : 'addSubscription',
+            'click #submit_subscription'                   : 'addSubscription',
             'click #submit_form_dropdown_add_subscription' : 'addSubscription',
-            'click .icon-remove-circle' : 'showDelete',
-            'click .delete_subscription' : 'deleteSubscription'
+            'click .icon-remove-circle'                    : 'showDelete',
+            'click .delete_subscription'                   : 'deleteSubscription'
         },
 
         addSubscription : function(event) {
@@ -59,7 +58,10 @@ $(function(){
                 data : {'subscription': currentTarget.prev().val()},
                 url: Routing.generate('api_subscriptions') + '?token=' + core_data.user_api_key,
                 success: function(data) {
+
+                    // Hide the spinner on the current add button
                     currentTarget.children('i').removeClass('icon-spinner icon-spin').addClass('icon-plus');
+
                     self.collection.add(data.success);
                     self.showInfo(data.success.subscription);
                 },
@@ -81,9 +83,10 @@ $(function(){
                 type : 'DELETE',
                 url: Routing.generate('api_subscriptions_get', {'id':id}) + '?token=' + core_data.user_api_key,
                 success: function(data) {
-                    $(event.currentTarget).parent('.subscription').animate({marginLeft:'1000px'}, {'duration':1000, 'queue':false}, function() {
+                    $(event.currentTarget).parent('.subscription').animate({marginLeft:'1000px'}, {'duration':1000, 'queue':false, 'complete': function() {
                         self.collection.remove(subscription);
-                    }).fadeOut(600);
+                        console.log(self.collection.models);
+                    }}).fadeOut();
                 },
                 error: function(data) {
                     self.showError();
@@ -101,7 +104,7 @@ $(function(){
         },
 
         showDelete : function(event) {
-            $(event.currentTarget).next().animate({ right : '8px' }, 300).delay(4000).animate({ right : '-82px' }, 300);
+            $(event.currentTarget).next().animate({ right : '8px' }, 300).delay(4000).animate({ right : '-105px' }, 300);
         },
 
         render : function() {

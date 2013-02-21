@@ -239,7 +239,7 @@
     <div id="subscriptions">
         <div id="title_subscriptions" class="h2">{{ 'subscriptions' | trans }}</div>
         <form>
-            <input id="input_subscription" type="text" placeholder="{{ 'add_subscription' | trans }}"/>
+            <input id="input_subscription" type="text" placeholder="{{ 'add_subscription' | trans }}" style="{% if user.local == 'fr' %}width:184px;{% else %}width:204px{% endif %}" />
             <button id="submit_subscription" class="btn btn-success"><i class="icon icon-plus icon-margin"></i>{{ 'add' | trans }}</button>
         </form>
         <div id="info_subscription" class="alert alert-info"><i class="icon icon-info-sign icon-margin"></i><span></span> {{ 'added' | trans }}</div>

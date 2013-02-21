@@ -3,7 +3,8 @@ error : "An error occured"
 login: "Login"
 logout: "Logout"
 add: "Add"
-added: 'added !'
+added: "added !"
+delete: "Delete"
 
 # Twitter
 twitter_error: "An error occured with Twitter, please try later"
