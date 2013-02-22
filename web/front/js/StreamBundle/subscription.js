@@ -50,6 +50,10 @@ $(function(){
             // Prevent the default dehavior of the submit button
             event.preventDefault();
 
+            if ('' === currentTarget.prev().val()) {
+                return;
+            }
+
             // Spinner on the add button
             currentTarget.children('i').removeClass('icon-plus').addClass('icon-spinner icon-spin');
 
@@ -85,7 +89,6 @@ $(function(){
                 success: function(data) {
                     $(event.currentTarget).parent('.subscription').animate({marginLeft:'1000px'}, {'duration':1000, 'queue':false, 'complete': function() {
                         self.collection.remove(subscription);
-                        console.log(self.collection.models);
                     }}).fadeOut();
                 },
                 error: function(data) {

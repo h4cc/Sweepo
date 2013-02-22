@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="sweepo.twitter.class">Sweepo\CoreBundle\Service\Twitter</parameter>
         <parameter key="sweepo.locale.listener.class">Sweepo\CoreBundle\Listener\LocaleListener</parameter>
+        <parameter key="sweepo.twig.date_extension.class">Sweepo\CoreBundle\Twig\DateExtension</parameter>
     </parameters>
 
     <services>
@@ -20,6 +21,10 @@
             <argument type="service" id="request" />
             <argument type="service" id="security.context" />
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="-32"/>
+        </service>
+        <service id="sweepo.twig.date_extension" class="%sweepo.twig.date_extension.class%">
+            <argument type="service" id="translator" />
+            <tag name="twig.extension" />
         </service>
     </services>
 </container>

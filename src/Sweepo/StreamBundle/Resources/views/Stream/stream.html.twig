@@ -1,233 +1,218 @@
 {% extends 'SweepoCoreBundle:Layouts:layout.html.twig' %}
 
 {% block container %}
-    <div class="container_day">
-        <div class="heading">
-            Today
-        </div>
-        <ul class="tweets">
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        <a href="">Rémy Gazelot</a>
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj <a href="" class="hightlight" data-scroll="abc">abc</a> bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+    <ul class="tweets">
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    <a href="">Rémy Gazelot</a>
+                    <span class="tweet_screen_name">@remygazelot</span>
+                    <span class="date">{{ user.createdAt | translate_date }}</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj <a href="" class="hightlight" data-scroll="abc">abc</a> bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
-        </ul>
-    </div>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-    <div class="container_day">
-        <div class="heading"></div>
-        <ul class="tweets">
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
-        </ul>
-    </div>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-    <div class="container_day">
-        <div class="heading"></div>
-        <ul class="tweets">
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
 
-            <li class="tweet">
-                <div class="tweet_container">
-                    <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
-                    <p class="tweet_name_author">
-                        Rémy Gazelot
-                        <span class="tweet_screen_name">@remygazelot</span>
-                    </p>
-                    <p class="tweet_content">
-                        blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
-                    </p>
-                    <p class="tweet_open"><a href="">open on Twitter</a></p>
-                </div>
-            </li>
-        </ul>
-    </div>
-
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    Rémy Gazelot
+                    <span class="tweet_screen_name">@remygazelot</span>
+                </p>
+                <p class="tweet_content">
+                    blabla abledfisdf dsfisdbqfj qsdfiubqdsf bqdsiufqsdifhqdus fqisdfv iqsdhfo iqdsbf qsdiof dosiqf oisdqbf lkqdsfbiofd fsdfsdf gfdsgsdfggsfdg s
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
+    </ul>
 {% endblock %}
 
 {% block sidebar %}

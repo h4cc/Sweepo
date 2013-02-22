@@ -2,107 +2,114 @@
 
 /* History */
 
-.container_day {
+    // .heading {
+    //     height:57px;
+    //     width:501px;
+    //     line-height:57px;
+    //     font-size:23px;
+    //     .text-shadow;
+    //     font-weight:bold;
+    //     color:@titleGrey;
+    //     padding-left:20px;
+    //     border-bottom:1px @greyBorder solid;
+    //     border-top-left-radius:4px;
+    //     border-top-right-radius:4px;
+    //     background:url('@{pathImages}/images/cross_heading_daily_background.png') repeat-x top left;
+    // }
+
+.tweets {
+    list-style:none;
+    margin:0;
     width:521px;
     background:@white;
-    .border-radius;
     .box-shadow(#d8d8d8);
     border:1px @greyBorder solid;
     position:relative;
     margin-top:35px;
 
-    .heading {
-        height:57px;
-        width:501px;
-        line-height:57px;
-        font-size:23px;
-        .text-shadow;
-        font-weight:bold;
-        color:@titleGrey;
-        padding-left:20px;
+    .tweet {
+        min-height:60px;
+        padding:11px 17px 11px 17px;
         border-bottom:1px @greyBorder solid;
-        border-top-left-radius:4px;
-        border-top-right-radius:4px;
-        background:url('@{pathImages}/images/cross_heading_daily_background.png') repeat-x top left;
+
+        .tweet_container {
+            position: relative;
+            padding:20px 0 0 67px;
+
+            .tweet_img {
+                position:absolute;
+                top:0;
+                left:0;
+            }
+
+            .tweet_name_author {
+                position:absolute;
+                top:0;
+                left:67px;
+                font-weight: bold;
+                width:420px;
+
+                a {
+                    color:@text;
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    color:@blue;
+                    text-decoration: none;
+                }
+
+                .tweet_screen_name {
+                    margin-left:8px;
+                    font-weight: normal;
+                    font-size: 12px;
+                    color:@grey;
+                }
+
+                .date {
+                    position:absolute;
+                    top:0px;
+                    right:0px;
+                    font-weight: normal;
+                    font-size: 12px;
+                    color:@grey;
+                }
+            }
+
+            .tweet_content {
+                margin:2px 0 5px 0;
+            }
+
+            .tweet_open {
+                margin-bottom:0;
+                font-size: 12px;
+
+                a {
+                    color:@blue;
+                    text-decoration:none;
+                }
+
+                a:hover {
+                    text-decoration:underline;
+                }
+            }
+        }
+
+        .hightlight {
+            color:@hightlight;
+        }
+
+        .hightlight:hover {
+            color:@hightlight;
+            text-decoration:none;
+        }
     }
 
-    .tweets {
-        list-style:none;
-        margin:0;
-
-        .tweet {
-            min-height:60px;
-            padding:11px 17px 11px 17px;
-            border-bottom:1px @greyBorder solid;
-
-            .tweet_container {
-                position: relative;
-                padding:20px 0 0 67px;
-
-                .tweet_img {
-                    position:absolute;
-                    top:0;
-                    left:0;
-                }
-
-                .tweet_name_author {
-                    position:absolute;
-                    top:0;
-                    left:67px;
-                    font-weight: bold;
-
-                    a {
-                        color:@text;
-                        text-decoration: none;
-                    }
-
-                    a:hover {
-                        color:@blue;
-                        text-decoration: none;
-                    }
-
-                    .tweet_screen_name {
-                        margin-left:8px;
-                        font-weight: normal;
-                        font-size: 12px;
-                        color:@grey;
-                    }
-                }
-
-                .tweet_content {
-                    margin-bottom:5px;
-                }
-
-                .tweet_open {
-                    margin-bottom:0;
-                    font-size: 12px;
-
-                    a {
-                        color:@blue;
-                        text-decoration:none;
-                    }
-
-                    a:hover {
-                        text-decoration:underline;
-                    }
-                }
-            }
-
-            .hightlight {
-                color:@hightlight;
-            }
-
-            .hightlight:hover {
-                color:@hightlight;
-                text-decoration:none;
-            }
-        }
-
-        .tweet:last-child {
-            border-bottom:none;
-        }
+    .tweet:last-child {
+        border-bottom:none;
     }
 }
+
 
 .container_day:first-child {
     margin-top:0;

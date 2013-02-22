@@ -6,6 +6,20 @@ add: "Add"
 added: "added !"
 delete: "Delete"
 
+# Months
+january: "january"
+february: "february"
+march: "march"
+april: "april"
+may: "may"
+june: "june"
+july: "july"
+august: "august"
+september: "september"
+october: "october"
+november: "november"
+december: "december"
+
 # Twitter
 twitter_error: "An error occured with Twitter, please try later"
 
