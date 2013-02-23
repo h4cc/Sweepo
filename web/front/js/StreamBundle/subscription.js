@@ -68,6 +68,10 @@ $(function(){
 
                     self.collection.add(data.success);
                     self.showInfo(data.success.subscription);
+
+                    if ( $('#no_subscriptions').is(':visible') ) {
+                        $('#no_subscriptions').hide();
+                    }
                 },
                 error: function(data) {
                     currentTarget.children('i').removeClass('icon-spinner icon-spin').addClass('icon-plus');
@@ -89,6 +93,10 @@ $(function(){
                 success: function(data) {
                     $(event.currentTarget).parent('.subscription').animate({marginLeft:'1000px'}, {'duration':1000, 'queue':false, 'complete': function() {
                         self.collection.remove(subscription);
+
+                        if (self.collection.models.length === 0) {
+                            $('#no_subscriptions').show();
+                        }
                     }}).fadeOut();
                 },
                 error: function(data) {

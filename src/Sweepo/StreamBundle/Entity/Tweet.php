@@ -24,7 +24,8 @@ class Tweet
     /**
      * @var string
      *
-     * @ORM\Column(name="user", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Sweepo\UserBundle\Entity\User", inversedBy="tweets")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 

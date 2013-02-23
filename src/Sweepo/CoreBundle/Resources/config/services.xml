@@ -8,6 +8,7 @@
         <parameter key="sweepo.twitter.class">Sweepo\CoreBundle\Service\Twitter</parameter>
         <parameter key="sweepo.locale.listener.class">Sweepo\CoreBundle\Listener\LocaleListener</parameter>
         <parameter key="sweepo.twig.date_extension.class">Sweepo\CoreBundle\Twig\DateExtension</parameter>
+        <parameter key="sweepo.analyse.tweet.class">Sweepo\CoreBundle\Service\AnalyseTweet</parameter>
     </parameters>
 
     <services>
@@ -26,5 +27,6 @@
             <argument type="service" id="translator" />
             <tag name="twig.extension" />
         </service>
+        <service id="sweepo.analyse.tweet" class="%sweepo.analyse.tweet.class%"></service>
     </services>
 </container>

@@ -4,6 +4,8 @@ namespace Sweepo\StreamBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+use Sweepo\UserBundle\Entity\User;
+
 /**
  * SubscriptionRepository
  *
@@ -12,4 +14,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class SubscriptionRepository extends EntityRepository
 {
+    public function findByKeywords(User $user)
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        return $qb->select('s.subscription')
+            ->where('s.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Sweepo\UserBundle\Entity\User;
 use Sweepo\UserBundle\Form\UserType;
+use Sweepo\UserBundle\Security\Authentication\Token\TwitterUserToken;
 
 class SiteController extends Controller
 {
@@ -55,6 +56,11 @@ class SiteController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
+
+                $twitterUserToken = new TwitterUserToken($user->getRoles());
+                $twitterUserToken->setUser($user);
+                $twitterUserToken->setLocale($user->getLocal());
+                $this->get('security.context')->setToken($twitterUserToken);
 
                 return $this->redirect($this->generateUrl('stream'));
             }

@@ -4,14 +4,17 @@ namespace Sweepo\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 use Sweepo\StreamBundle\Entity\Subscription;
+use Sweepo\StreamBundle\Entity\Tweet;
 
 /**
  * User
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Sweepo\UserBundle\Entity\UserRepository")
+ * @DoctrineAssert\UniqueEntity("email")
  */
 class User
 {
@@ -27,7 +30,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", unique=true, type="string", length=255)
      */
     private $email;
 
@@ -95,7 +98,12 @@ class User
     private $api_key;
 
     /**
-     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Subscription", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Tweet", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $tweets;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Subscription", mappedBy="user", cascade={"persist", "merge", "remove"})
      */
     private $subscriptions;
 
@@ -109,6 +117,7 @@ class User
         $this->created_at = new \DateTime();
         $this->api_key = hash('md5', uniqid(true));
         $this->subscriptions = new ArrayCollection();
+        $this->tweets = new ArrayCollection();
     }
 
     public function toArray($short = true)
@@ -376,13 +385,29 @@ class User
     }
 
     /**
-     * Get roless
+     * Get roles
      *
      * @return string
      */
     public function getRoles()
     {
         return ['ROLE_USER'];
+    }
+
+    public function addTweet(Tweet $tweet)
+    {
+        $tweet->setUser($this);
+        $this->tweets->add($tweet);
+    }
+
+    /**
+     * Get tweets
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getTweets()
+    {
+        return $this->tweets;
     }
 
     public function addSubscription(Subscription $subscription)
