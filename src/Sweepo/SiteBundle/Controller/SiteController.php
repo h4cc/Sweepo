@@ -61,6 +61,7 @@ class SiteController extends Controller
                 $twitterUserToken->setUser($user);
                 $twitterUserToken->setLocale($user->getLocal());
                 $this->get('security.context')->setToken($twitterUserToken);
+                $this->get('session')->set('_locale', $user->getLocal());
 
                 return $this->redirect($this->generateUrl('stream'));
             }
