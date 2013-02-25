@@ -18,10 +18,12 @@ class TweetRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('t');
 
-        return $qb->select('t.id')
+        return $qb->select('t.tweet_id')
             ->where('t.user = :user')
             ->setParameter('user', $user)
+            ->setMaxResults(1)
+            ->orderBy('t.id', 'DESC')
             ->getQuery()
-            ->getResult();
+            ->getSingleScalarResult();
     }
 }

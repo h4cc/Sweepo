@@ -79,7 +79,7 @@ class Twitter
     public function get($url, $parameters = [], $oauthToken, $oauthTokenSecret)
     {
         $connection = $this->getConnection($oauthToken, $oauthTokenSecret);
-        return $connection->get($url);
+        return $connection->get($url, $parameters);
     }
 
     /**

@@ -30,9 +30,9 @@ class Tweet
     private $user;
 
     /**
-     * @var integer
+     * @var bigint
      *
-     * @ORM\Column(name="tweet_id", type="integer")
+     * @ORM\Column(name="tweet_id", type="bigint")
      */
     private $tweet_id;
 
@@ -124,7 +124,7 @@ class Tweet
     /**
      * Set tweet_id
      *
-     * @param integer $tweetId
+     * @param bigint $tweetId
      * @return Tweet
      */
     public function setTweetId($tweetId)

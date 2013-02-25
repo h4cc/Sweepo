@@ -36,16 +36,15 @@ class Stream
     public function getStream(User $user)
     {
         $id = $this->em->getRepository('SweepoStreamBundle:Tweet')->getLastId($user);
-        //error_log(var_export($id, true));
-        $tweets = $this->twitter->get('statuses/home_timeline', [], $user->getToken(), $user->getTokenSecret());
 
+        $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', ['since_id' => $id], $user->getToken(), $user->getTokenSecret());
         $subscriptions = $this->em->getRepository('SweepoStreamBundle:Subscription')->findByKeywords($user);
 
         foreach ($subscriptions as $subscription) {
             $arraySubscriptions[] = $subscription['subscription'];
         }
 
-        $tweetsAnalysed = $this->analyse->analyseCollection($tweets, $arraySubscriptions);
+        $tweetsAnalysed = $this->analyse->analyseCollection($tweetsRetrieved, $arraySubscriptions);
 
         if (empty($tweetsAnalysed)) {
             return;
