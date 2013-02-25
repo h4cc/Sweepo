@@ -46,11 +46,12 @@ class ApiSubscriptionController extends Controller
                     return $this->get('sweepo.api.response')->errorResponse('Subscription is a missing mandatory parameter', ErrorCode::INVALID_PARAMETER, 400);
                 }
 
-                $newSubscription = (new Subscription())->setSubscription($subscription)->setType($subscription);
+                $newSubscription = (new Subscription())
+                    ->setSubscription($subscription)
+                    ->setType($subscription);
+
                 $user = $this->getUser();
                 $user->addSubscription($newSubscription);
-
-                $em->persist($newSubscription);
                 $em->persist($user);
                 $em->flush();
 

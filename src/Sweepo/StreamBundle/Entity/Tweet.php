@@ -122,29 +122,6 @@ class Tweet
     }
 
     /**
-     * Set user
-     *
-     * @param string $user
-     * @return Tweet
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return string
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Set tweet_id
      *
      * @param integer $tweetId
@@ -395,5 +372,28 @@ class Tweet
     public function getCreatedAt()
     {
         return $this->created_at;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Sweepo\UserBundle\Entity\User $user
+     * @return Tweet
+     */
+    public function setUser(\Sweepo\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Sweepo\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

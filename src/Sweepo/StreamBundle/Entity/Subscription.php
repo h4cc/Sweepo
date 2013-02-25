@@ -27,7 +27,7 @@ class Subscription
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Sweepo\UserBundle\Entity\User", inversedBy="subscriptions")
+     * @ORM\ManyToOne(targetEntity="Sweepo\UserBundle\Entity\User", inversedBy="subscriptions", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -165,17 +165,20 @@ class Subscription
     /**
      * Set user
      *
-     * @param User $user
+     * @param \Sweepo\UserBundle\Entity\User $user
+     * @return Subscription
      */
-    public function setUser($user)
+    public function setUser(\Sweepo\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
+
+        return $this;
     }
 
     /**
      * Get user
      *
-     * @return User
+     * @return \Sweepo\UserBundle\Entity\User
      */
     public function getUser()
     {

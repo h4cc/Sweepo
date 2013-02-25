@@ -103,7 +103,7 @@ class User
     private $tweets;
 
     /**
-     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Subscription", mappedBy="user", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Subscription", mappedBy="user", cascade={"persist", "remove"})
      */
     private $subscriptions;
 
@@ -394,32 +394,68 @@ class User
         return ['ROLE_USER'];
     }
 
-    public function addTweet(Tweet $tweet)
+    /**
+     * Add tweets
+     *
+     * @param \Sweepo\StreamBundle\Entity\Tweet $tweets
+     * @return User
+     */
+    public function addTweet(\Sweepo\StreamBundle\Entity\Tweet $tweets)
     {
-        $tweet->setUser($this);
-        $this->tweets->add($tweet);
+        $tweets->setUser($this);
+        $this->tweets[] = $tweets;
+
+        return $this;
+    }
+
+    /**
+     * Remove tweets
+     *
+     * @param \Sweepo\StreamBundle\Entity\Tweet $tweets
+     */
+    public function removeTweet(\Sweepo\StreamBundle\Entity\Tweet $tweets)
+    {
+        $this->tweets->removeElement($tweets);
     }
 
     /**
      * Get tweets
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTweets()
     {
         return $this->tweets;
     }
 
-    public function addSubscription(Subscription $subscription)
+    /**
+     * Add subscriptions
+     *
+     * @param \Sweepo\StreamBundle\Entity\Subscription $subscriptions
+     * @return User
+     */
+    public function addSubscription(\Sweepo\StreamBundle\Entity\Subscription $subscriptions)
     {
-        $subscription->setUser($this);
-        $this->subscriptions->add($subscription);
+        $subscriptions->setUser($this);
+        $this->subscriptions[] = $subscriptions;
+
+        return $this;
+    }
+
+    /**
+     * Remove subscriptions
+     *
+     * @param \Sweepo\StreamBundle\Entity\Subscription $subscriptions
+     */
+    public function removeSubscription(\Sweepo\StreamBundle\Entity\Subscription $subscriptions)
+    {
+        $this->subscriptions->removeElement($subscriptions);
     }
 
     /**
      * Get subscriptions
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSubscriptions()
     {

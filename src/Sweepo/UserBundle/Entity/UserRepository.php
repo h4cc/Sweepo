@@ -12,4 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    public function loadUser($token, $token_secret)
+    {
+        error_log('loadUser');
+
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.token = :token')
+            ->andWhere('u.token_secret = :token_secret')
+            ->setParameter('token', $token)
+            ->setParameter('token_secret', $token_secret)
+            ->getQuery();
+
+        try {
+            // The Query::getSingleResult() method throws an exception
+            // if there is no record matching the criteria.
+            $user = $qb->getSingleResult();
+        } catch (\Exception $e) {
+            $user = null;
+        }
+
+        return $user;
+    }
 }

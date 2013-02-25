@@ -54,6 +54,7 @@ class Stream
         foreach ($tweetsAnalysed as $tweet) {
             $newTweet = new Tweet();
             $newTweet->setTweetId($tweet->id)
+                ->setUser($user)
                 ->setText($tweet->text)
                 ->setTweetCreatedAt(new \DateTime($tweet->created_at))
                 ->setInReplyToScreenName($tweet->in_reply_to_screen_name)
@@ -65,8 +66,7 @@ class Stream
                 ->setRawUserScreenName(null)
                 ->setCreatedAt(new \DateTime());
 
-            $user->addTweet($newTweet);
-            $this->em->persist($user);
+            $this->em->persist($newTweet);
         }
 
         $this->em->flush();

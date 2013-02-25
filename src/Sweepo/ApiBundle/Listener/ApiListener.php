@@ -12,6 +12,8 @@ use Sweepo\ApiBundle\Response\ApiResponse;
 use Sweepo\ApiBundle\Authentication\ApiLogin;
 use Sweepo\CoreBundle\ErrorCode\ErrorCode;
 
+use Sweepo\UserBundle\Security\Authentication\Token\TwitterUserToken;
+
 class ApiListener
 {
     /**
@@ -63,7 +65,12 @@ class ApiListener
 
             // Login
             $roles = $user->getRoles();
-            $this->security->setToken(new UsernamePasswordToken($user, null, 'main', $roles));
+
+            $authenticatedToken = new TwitterUserToken($roles);
+            $authenticatedToken->setUser($user);
+            $authenticatedToken->setLocale($user->getLocal());
+
+            $this->security->setToken($authenticatedToken);
         }
     }
 

@@ -13,7 +13,6 @@
     <services>
         <service id="twitter.security.authentication.provider" class="%sweepo.twitter.provider.class%" public="false">
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="session" />
         </service>
 
         <service id="twitter.security.authentication.listener" class="%sweepo.twitter.listener.class%" public="false">

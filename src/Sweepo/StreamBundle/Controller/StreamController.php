@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
+use Sweepo\StreamBundle\Entity\Tweet;
+
 class StreamController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class StreamController extends Controller
      */
     public function streamAction()
     {
-        $this->get('sweepo.stream')->getStream($this->getUser());
+        // $this->get('sweepo.stream')->getStream($this->getUser());
 
         return [
             'user' => $this->getUser(),

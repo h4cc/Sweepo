@@ -52,7 +52,13 @@ class TwitterListener implements ListenerInterface
      */
     public function handle(GetResponseEvent $event)
     {
-        if (null !== $this->securityContext->getToken() || ($event->getRequest()->attributes->get('_route') !== 'login' && $event->getRequest()->attributes->get('_route') !== 'login_check')) {
+        if (null !== $this->securityContext->getToken()) {
+
+                $twitterUserToken = new TwitterUserToken();
+                $twitterUserToken->setTwitterToken($this->securityContext->getToken()->getUser()->getToken());
+                $twitterUserToken->setTwitterTokenSecret($this->securityContext->getToken()->getUser()->getTokenSecret());
+
+                $this->authenticate($twitterUserToken, $event);
             return;
         }
 
@@ -75,17 +81,22 @@ class TwitterListener implements ListenerInterface
                 $twitterUserToken->setTwitterToken($accessToken['oauth_token']);
                 $twitterUserToken->setTwitterTokenSecret($accessToken['oauth_token_secret']);
 
-                if (false !== $authToken = $this->twitterProvider->authenticate($twitterUserToken)) {
-                    $this->securityContext->setToken($authToken);
-                    $this->session->set('_locale', $authToken->getLocale());
-                    $this->container->get('request')->setLocale($authToken->getLocale());
-
-                    return;
-                }
-
-                $event->setResponse(new RedirectResponse($this->container->get('router')->generate('create', ['oauth_token' => $accessToken['oauth_token'], 'oauth_token_secret' => $accessToken['oauth_token_secret']])));
-
+                $this->authenticate($twitterUserToken, $event);
             break;
+        }
+    }
+
+    private function authenticate($twitterUserToken, $event)
+    {
+        try {
+            $authToken = $this->twitterProvider->authenticate($twitterUserToken);
+            $this->securityContext->setToken($authToken);
+            $this->session->set('_locale', $authToken->getLocale());
+            $this->container->get('request')->setLocale($authToken->getLocale());
+
+            return;
+        } catch (AuthenticationException $e) {
+            $event->setResponse(new RedirectResponse($this->container->get('router')->generate('create', ['oauth_token' => $accessToken['oauth_token'], 'oauth_token_secret' => $accessToken['oauth_token_secret']])));
         }
     }
 }
