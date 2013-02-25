@@ -36,9 +36,9 @@ class Stream
     public function getStream(User $user)
     {
         $id = $this->em->getRepository('SweepoStreamBundle:Tweet')->getLastId($user);
-
+        //error_log(var_export($id, true));
         $tweets = $this->twitter->get('statuses/home_timeline', [], $user->getToken(), $user->getTokenSecret());
-        // die(var_dump($tweets));
+
         $subscriptions = $this->em->getRepository('SweepoStreamBundle:Subscription')->findByKeywords($user);
 
         foreach ($subscriptions as $subscription) {
@@ -46,7 +46,7 @@ class Stream
         }
 
         $tweetsAnalysed = $this->analyse->analyseCollection($tweets, $arraySubscriptions);
-        // die(var_dump($tweetsAnalysed));
+
         if (empty($tweetsAnalysed)) {
             return;
         }
@@ -54,7 +54,6 @@ class Stream
         foreach ($tweetsAnalysed as $tweet) {
             $newTweet = new Tweet();
             $newTweet->setTweetId($tweet->id)
-                ->setUser($user)
                 ->setText($tweet->text)
                 ->setTweetCreatedAt(new \DateTime($tweet->created_at))
                 ->setInReplyToScreenName($tweet->in_reply_to_screen_name)
@@ -66,7 +65,8 @@ class Stream
                 ->setRawUserScreenName(null)
                 ->setCreatedAt(new \DateTime());
 
-            $this->em->persist($newTweet);
+            $user->addTweet($newTweet);
+            $this->em->persist($user);
         }
 
         $this->em->flush();

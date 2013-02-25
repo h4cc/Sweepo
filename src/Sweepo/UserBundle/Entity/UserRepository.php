@@ -14,8 +14,6 @@ class UserRepository extends EntityRepository
 {
     public function loadUser($token, $token_secret)
     {
-        error_log('loadUser');
-
         $qb = $this->createQueryBuilder('u')
             ->where('u.token = :token')
             ->andWhere('u.token_secret = :token_secret')
