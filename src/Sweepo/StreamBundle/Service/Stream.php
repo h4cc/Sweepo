@@ -33,11 +33,16 @@ class Stream
         $this->analyse = $analyse;
     }
 
-    public function getStream(User $user)
+    public function getStream(User $user, $sinceId = null)
+    {
+        return $this->em->getRepository('SweepoStreamBundle:Tweet')->getStream($user, $sinceId);
+    }
+
+    public function fetchTweetsFromTwitter(User $user)
     {
         $id = $this->em->getRepository('SweepoStreamBundle:Tweet')->getLastId($user);
 
-        $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', ['since_id' => $id], $user->getToken(), $user->getTokenSecret());
+        $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', null !== $id ? ['since_id' => $id] : [], $user->getToken(), $user->getTokenSecret());
         $subscriptions = $this->em->getRepository('SweepoStreamBundle:Subscription')->findByKeywords($user);
 
         foreach ($subscriptions as $subscription) {
@@ -47,7 +52,7 @@ class Stream
         $tweetsAnalysed = $this->analyse->analyseCollection($tweetsRetrieved, $arraySubscriptions);
 
         if (empty($tweetsAnalysed)) {
-            return;
+            return [];
         }
 
         foreach ($tweetsAnalysed as $tweet) {
@@ -66,10 +71,12 @@ class Stream
 
             $user->addTweet($newTweet);
             $this->em->persist($user);
+
+            $tweetCollection[] = $newTweet;
         }
 
         $this->em->flush();
 
-        return;
+        return $tweetCollection;
     }
 }

@@ -16,14 +16,37 @@ class TweetRepository extends EntityRepository
 {
     public function getLastId(User $user)
     {
-        $qb = $this->createQueryBuilder('t');
-
-        return $qb->select('t.tweet_id')
+        $qb = $this->createQueryBuilder('t')
+            ->select('t.tweet_id')
             ->where('t.user = :user')
             ->setParameter('user', $user)
             ->setMaxResults(1)
-            ->orderBy('t.id', 'DESC')
+            ->orderBy('t.tweet_created_at', 'DESC')
+            ->getQuery();
+
+        try {
+            $id = $qb->getSingleScalarResult();
+        } catch (\Exception $e) {
+            $id = null;
+        }
+
+        return $id;
+    }
+
+    public function getStream(User $user, $sinceId = null)
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->where('t.user = :user')
+            ->setParameter('user', $user);
+
+        if (null !== $sinceId) {
+            $qb->andWhere('t.id > :sinceId')
+                ->setParameter('sinceId', $sinceId);
+        }
+
+        return $qb->orderBy('t.tweet_created_at', 'DESC')
+            ->setParameter('user', $user)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getResult();
     }
 }

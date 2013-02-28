@@ -13,4 +13,7 @@ class ErrorCode
 
     // Subscription
     const SUBSCRIPTION_NOT_FOUND = 'subscription_not_found';
+
+    // Tweets
+    const TWEETS_NOT_FOUND       = 'tweets_not_found';
 }

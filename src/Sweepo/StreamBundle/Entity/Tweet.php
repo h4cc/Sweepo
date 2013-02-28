@@ -111,6 +111,32 @@ class Tweet
         $this->created_at = new \DateTime();
     }
 
+    public function toArray($short = true)
+    {
+        $array = [
+            'id'                      => $this->id,
+            'tweet_id'                => $this->tweet_id,
+            'text'                    => $this->text,
+            'tweet_created_at'        => $this->tweet_created_at,
+            'in_reply_to_screen_name' => $this->in_reply_to_screen_name,
+            'owner_id'                => $this->owner_id,
+            'owner_name'              => $this->owner_name,
+            'owner_screen_name'       => $this->owner_screen_name,
+            'owner_profile_image_url' => $this->owner_profile_image_url,
+            'is_retweeted'            => $this->is_retweeted,
+            'raw_user_screen_name'    => $this->raw_user_screen_name,
+        ];
+
+        if (!$short) {
+            $array = array_merge($array, [
+                'user'       => $this->user->toArray(),
+                'created_at' => $this->created_at,
+            ]);
+        }
+
+        return $array;
+    }
+
     /**
      * Get id
      *
