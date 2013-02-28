@@ -25,6 +25,7 @@ class DateExtension extends \Twig_Extension
 
     public function translateDate($datetime)
     {
+        error_log(var_export($datetime, true));
         $year = $datetime->format('Y');
         $day = $datetime->format('d');
         $month = $this->translator->trans(strtolower($datetime->format('F')));

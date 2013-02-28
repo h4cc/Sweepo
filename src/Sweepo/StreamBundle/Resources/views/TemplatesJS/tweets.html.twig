@@ -1,0 +1,18 @@
+<script type="text/template" id="tweet_template">
+    <% _.each(tweets, function(tweet) { %>
+        <li class="tweet">
+            <div class="tweet_container">
+                <img src="<%= tweet.owner_profile_image_url %>" width="57px" height="57px" class="img-rounded tweet_img"/>
+                <p class="tweet_name_author">
+                    <a href=""><%= tweet.owner_name %></a>
+                    <span class="tweet_screen_name">@<%= tweet.owner_screen_name %></span>
+                    <span class="date"><%= tweet.tweet_created_at %></span>
+                </p>
+                <p class="tweet_content">
+                    <%= tweet.text %><a href="" class="hightlight" data-scroll="abc">abc</a>
+                </p>
+                <p class="tweet_open"><a href="">open on Twitter</a></p>
+            </div>
+        </li>
+    <% }); %>
+</script>

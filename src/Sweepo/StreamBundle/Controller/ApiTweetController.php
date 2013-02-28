@@ -9,6 +9,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Sweepo\CoreBundle\ErrorCode\ErrorCode;
+use Sweepo\StreamBundle\Entity\Tweet;
 
 /**
  * @Route("/api/tweets")
@@ -25,7 +26,7 @@ class ApiTweetController extends Controller
             case 'GET':
                 $sinceId = $request->query->get('id', null);
                 $tweets = $this->get('sweepo.stream')->getStream($this->getUser(), $sinceId);
-                die(var_dump($tweets));
+
                 if (empty($tweets)) {
                     return $this->get('sweepo.api.response')->errorResponse('Tweets not found', ErrorCode::TWEETS_NOT_FOUND, 404);
                 }
