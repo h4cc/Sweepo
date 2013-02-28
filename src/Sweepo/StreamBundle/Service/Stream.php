@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManager;
 use Sweepo\UserBundle\Entity\User;
 use Sweepo\CoreBundle\Service\Twitter;
 use Sweepo\CoreBundle\Service\AnalyseTweet;
-use Sweepo\StreamBundle\Entity\Tweet;
 
 class Stream
 {
@@ -56,18 +55,7 @@ class Stream
         }
 
         foreach ($tweetsAnalysed as $tweet) {
-            $newTweet = new Tweet();
-            $newTweet->setTweetId($tweet->id)
-                ->setText($tweet->text)
-                ->setTweetCreatedAt(new \DateTime($tweet->created_at))
-                ->setInReplyToScreenName($tweet->in_reply_to_screen_name)
-                ->setOwnerId($tweet->user->id)
-                ->setOwnerName($tweet->user->name)
-                ->setOwnerScreenName($tweet->user->screen_name)
-                ->setOwnerProfileImageUrl($tweet->user->profile_image_url)
-                ->setIsRetweeted($tweet->retweeted)
-                ->setRawUserScreenName(null)
-                ->setCreatedAt(new \DateTime());
+            $newTweet = $this->analyse->createTweet($tweet);
 
             $user->addTweet($newTweet);
             $this->em->persist($user);

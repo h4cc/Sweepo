@@ -100,6 +100,13 @@ class Tweet
     private $raw_user_screen_name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="raw_user_name", type="string", length=255, nullable=true)
+     */
+    private $raw_user_name;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -375,6 +382,29 @@ class Tweet
     public function getRawUserScreenName()
     {
         return $this->raw_user_screen_name;
+    }
+
+    /**
+     * Set raw_user_name
+     *
+     * @param string $rawUserScreenName
+     * @return Tweet
+     */
+    public function setRawUserName($rawUserName)
+    {
+        $this->raw_user_name = $rawUserName;
+
+        return $this;
+    }
+
+    /**
+     * Get raw_user_name
+     *
+     * @return string
+     */
+    public function getRawUserName()
+    {
+        return $this->raw_user_name;
     }
 
     /**
