@@ -41,7 +41,7 @@ class Stream
     {
         $id = $this->em->getRepository('SweepoStreamBundle:Tweet')->getLastId($user);
 
-        $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', null !== $id ? ['since_id' => $id] : [], $user->getToken(), $user->getTokenSecret());
+        $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', null !== $id ? ['since_id' => $id, 'count' => 200] : ['count' => 200], $user->getToken(), $user->getTokenSecret());
         $subscriptions = $this->em->getRepository('SweepoStreamBundle:Subscription')->findByKeywords($user);
 
         foreach ($subscriptions as $subscription) {

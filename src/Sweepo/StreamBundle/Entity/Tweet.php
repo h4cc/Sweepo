@@ -132,6 +132,7 @@ class Tweet
             'owner_profile_image_url' => $this->owner_profile_image_url,
             'is_retweeted'            => $this->is_retweeted,
             'raw_user_screen_name'    => $this->raw_user_screen_name,
+            'raw_user_name'           => $this->raw_user_name,
         ];
 
         if (!$short) {

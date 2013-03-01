@@ -18,7 +18,8 @@ class StreamController extends Controller
      */
     public function streamAction()
     {
-        $this->get('sweepo.stream')->fetchTweetsFromTwitter($this->getUser());
+        //$this->get('sweepo.stream')->fetchTweetsFromTwitter($this->getUser());
+
         return [
             'user' => $this->getUser(),
         ];
