@@ -12,7 +12,7 @@
                     <%= tweet.text %><a href="" class="hightlight" data-scroll="abc">abc</a>
                 </p>
                 <% if (tweet.is_retweeted == true) { %>
-                    <p>Retweeted by <a href="http://twitter.com/<%= tweet.raw_user_screen_name %>"><%= tweet.raw_user_name %></a></p>
+                    <p class="retweeted"><i class="icon icon-retweet icon-margin"></i>Retweeted by <a href="http://twitter.com/<%= tweet.raw_user_screen_name %>"><%= tweet.raw_user_name %></a></p>
                 <% } %>
                 <p class="tweet_open"><a href="http://twitter.com/<%= tweet.owner_screen_name %>/status/<%= tweet.tweet_id %>">open on Twitter</a></p>
             </div>
