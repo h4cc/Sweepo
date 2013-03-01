@@ -9,7 +9,7 @@
                     <span class="date"><%= tweet.tweet_created_at %></span>
                 </p>
                 <p class="tweet_content">
-                    <%= tweet.text %><a href="" class="hightlight" data-scroll="abc">abc</a>
+                    <%= tweet.text %>
                 </p>
                 <% if (tweet.is_retweeted == true) { %>
                     <p class="retweeted"><i class="icon icon-retweet icon-margin"></i>Retweeted by <a href="http://twitter.com/<%= tweet.raw_user_screen_name %>"><%= tweet.raw_user_name %></a></p>

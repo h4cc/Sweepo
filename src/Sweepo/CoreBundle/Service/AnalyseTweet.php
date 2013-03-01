@@ -39,6 +39,8 @@ class AnalyseTweet
 
     public function createTweet($rawTweet)
     {
+        $rawTweet = $this->textHandler($rawTweet);
+
         $tweet = new Tweet();
 
         $tweet->setTweetId($rawTweet->id);
@@ -53,9 +55,8 @@ class AnalyseTweet
         $tweet->setOwnerProfileImageUrl($rawTweet->user->profile_image_url);
 
         // If is a retweeted tweet
-        if (isset($rawTweet->retweeted_status) && 'RT' === $str = substr($rawTweet->text, 0, 2)) {
+        if (true === $this->isRetweeted($rawTweet)) {
             $tweet->setIsRetweeted(true);
-            $tweet->setText(substr_replace($rawTweet->text, '', 0, strpos($rawTweet->text, ':') + 2));
             $tweet->setOwnerId($rawTweet->retweeted_status->user->id);
             $tweet->setOwnerName($rawTweet->retweeted_status->user->name);
             $tweet->setOwnerScreenName($rawTweet->retweeted_status->user->screen_name);
@@ -70,5 +71,60 @@ class AnalyseTweet
     private function addTweet($tweet)
     {
         $this->tweetsSaved[] = $tweet;
+    }
+
+    private function textHandler($tweet)
+    {
+        if (true === $this->isRetweeted($tweet)) {
+            $tweet->text = substr_replace($tweet->text, '', 0, strpos($tweet->text, ':') + 2);
+        }
+
+        $tweet->text = $this->searchLinks($tweet->text);
+        $tweet->text = $this->searchHashtag($tweet->text);
+        $tweet->text = $this->searchMentions($tweet->text);
+
+        return $tweet;
+    }
+
+    private function isRetweeted($tweet)
+    {
+        if (isset($tweet->retweeted_status) && 'RT' === $str = substr($tweet->text, 0, 2)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function searchHashtag($text)
+    {
+        preg_match_all('/#[a-zA-Z0-9]+/', $text, $matches);
+
+        foreach ($matches[0] as $hashtag) {
+            $text = substr_replace($text, '<span class="hashtag">' . $hashtag . '</span>', strrpos($text, $hashtag), strlen($hashtag));
+        }
+
+        return $text;
+    }
+
+    private function searchMentions($text)
+    {
+        preg_match_all('/@[a-zA-Z0-9]+/', $text, $matches);
+
+        foreach ($matches[0] as $mention) {
+            $text = substr_replace($text, '<a href="http://twitter.com/' . $mention . '" class="mention">' . $mention . '</a>', strrpos($text, $mention), strlen($mention));
+        }
+
+        return $text;
+    }
+
+    private function searchLinks($text)
+    {
+        preg_match_all('/http:\/\/[.\/a-zA-Z0-9]+/', $text, $matches);
+
+        foreach ($matches[0] as $link) {
+            $text = substr_replace($text, '<a href="' . $link . '" class="link">' . $link . '</a>', strrpos($text, $link), strlen($link));
+        }
+
+        return $text;
     }
 }
