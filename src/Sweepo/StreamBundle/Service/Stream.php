@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 
 use Sweepo\UserBundle\Entity\User;
 use Sweepo\CoreBundle\Service\Twitter;
-use Sweepo\CoreBundle\Service\AnalyseTweet;
+use Sweepo\StreamBundle\Service\AnalyseTweet;
 
 class Stream
 {
@@ -21,7 +21,7 @@ class Stream
     private $twitter;
 
     /**
-     * @var Sweepo\CoreBundle\Service\AnalyseTweet
+     * @var Sweepo\StreamBundle\Service\AnalyseTweet
      */
     private $analyse;
 

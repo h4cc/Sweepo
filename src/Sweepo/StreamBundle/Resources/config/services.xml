@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="sweepo.stream.class">Sweepo\StreamBundle\Service\Stream</parameter>
+        <parameter key="sweepo.analyse.tweet.class">Sweepo\StreamBundle\Service\AnalyseTweet</parameter>
     </parameters>
 
     <services>
@@ -14,5 +15,6 @@
             <argument type="service" id="sweepo.twitter" />
             <argument type="service" id="sweepo.analyse.tweet" />
         </service>
+        <service id="sweepo.analyse.tweet" class="%sweepo.analyse.tweet.class%"></service>
     </services>
 </container>

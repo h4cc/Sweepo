@@ -1,9 +1,9 @@
 <?php
 
-namespace Sweepo\CoreBundle\Service;
+namespace Sweepo\StreamBundle\Service;
 
-use Sweepo\UserBundle\Entity\User;
 use Sweepo\StreamBundle\Entity\Tweet;
+use Sweepo\UserBundle\Entity\User;
 
 class AnalyseTweet
 {
