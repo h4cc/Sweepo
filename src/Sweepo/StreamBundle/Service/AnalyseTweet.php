@@ -3,6 +3,7 @@
 namespace Sweepo\StreamBundle\Service;
 
 use Sweepo\StreamBundle\Entity\Tweet;
+use Sweepo\StreamBundle\Entity\Subscription;
 use Sweepo\UserBundle\Entity\User;
 
 class AnalyseTweet
@@ -22,7 +23,7 @@ class AnalyseTweet
             foreach ($subscriptions as $subscription) {
 
                 // If the subscription is an @screen_name format
-                if (preg_match('/^\@/', strtolower($subscription->getSubscription()))) {
+                if ($subscription->getType() === Subscription::TYPE_USER) {
 
                     if (strtolower($subscription->getSubscription()) === '@' . strtolower($tweet->user->screen_name)) {
 
@@ -30,11 +31,16 @@ class AnalyseTweet
                             $this->addTweet($tweet);
                         }
                     }
+
                 // Else we search just the keyword in text
                 } else {
                     if (preg_match('/' . strtolower($subscription->getSubscription()) . '/', $text)) {
 
                         if (false === $this->alreadyAdded($tweet->id_str, $arrayTweetId)) {
+
+                            // handleText to place hightlight on keyword
+                            $tweet->text = $this->placeKeywordHightlight($tweet->text, $subscription->getSubscription());
+
                             $this->addTweet($tweet);
                         }
                     }
@@ -113,6 +119,19 @@ class AnalyseTweet
         }
 
         return false;
+    }
+
+    // ==== Text Handler ==== //
+
+    private function placeKeywordHightlight($text, $keyword)
+    {
+        preg_match_all('/' . $keyword . '/', $text, $matches);
+
+        foreach ($matches[0] as $match) {
+            $text = substr_replace($text, '<span class="hightlight">' . $match . '</span>', strrpos($text, $match), strlen($match));
+        }
+
+        return $text;
     }
 
     private function searchHashtag($text)
