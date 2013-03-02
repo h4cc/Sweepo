@@ -24,8 +24,7 @@ class ApiTweetController extends Controller
     {
         switch ($request->getMethod()) {
             case 'GET':
-                $sinceId = $request->query->get('id', null);
-                $tweets = $this->get('sweepo.stream')->getStream($this->getUser(), $sinceId);
+                $tweets = $this->get('sweepo.stream')->getStream($this->getUser());
 
                 if (empty($tweets)) {
                     return $this->get('sweepo.api.response')->errorResponse('Tweets not found', ErrorCode::TWEETS_NOT_FOUND, 404);
@@ -42,5 +41,24 @@ class ApiTweetController extends Controller
 
             break;
         }
+    }
+
+    /**
+     * @Route("/refresh", name="api_tweets_refresh", options={"expose"=true})
+     * @Method({"GET", "OPTIONS"})
+     */
+    public function refreshTweetsFromTwitter(Request $request)
+    {
+        $tweets = $this->get('sweepo.stream')->fetchTweetsFromTwitter($this->getUser());
+
+        if (empty($tweets)) {
+            return $this->get('sweepo.api.response')->errorResponse('Tweets not found', ErrorCode::TWEETS_NOT_FOUND, 404);
+        }
+
+        array_walk($tweets, function (Tweet &$tweet) {
+            $tweet = $tweet->toArray();
+        });
+
+        return $this->get('sweepo.api.response')->successResponse($tweets);
     }
 }

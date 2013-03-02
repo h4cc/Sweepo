@@ -33,18 +33,21 @@ class TweetRepository extends EntityRepository
         return $id;
     }
 
-    public function getStream(User $user, $sinceId = null)
+    public function getStream(User $user)
     {
-        $qb = $this->createQueryBuilder('t')
+        return $this->createQueryBuilder('t')
             ->where('t.user = :user')
-            ->setParameter('user', $user);
+            ->orderBy('t.tweet_created_at', 'DESC')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
 
-        if (null !== $sinceId) {
-            $qb->andWhere('t.id > :sinceId')
-                ->setParameter('sinceId', $sinceId);
-        }
-
-        return $qb->orderBy('t.tweet_created_at', 'DESC')
+    public function getTweetId(User $user)
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t.tweet_id')
+            ->where('t.user = :user')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();

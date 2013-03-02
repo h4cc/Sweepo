@@ -14,8 +14,15 @@ $(function () {
         el : $('body'),
 
         initialize : function() {
+            this.collection.comparator = function(tweet) {
+              return -tweet.get("tweet_id");
+            };
             this.template = _.template($('#tweet_template').html());
             this.fetchTweets();
+        },
+
+        events : {
+            'click #refresh_stream' : 'loadTweets',
         },
 
         fetchTweets : function () {
@@ -29,7 +36,25 @@ $(function () {
                     self.render();
                 },
                 error: function(data) {
+                    $('#spin_list_tweets').hide();
+                }
+            });
+        },
 
+        loadTweets : function () {
+            var self = this;
+            $('#spin_list_tweets').show();
+
+            $.ajax({
+                type : 'GET',
+                url: Routing.generate('api_tweets_refresh') + '?token=' + core_data.user_api_key,
+                success: function(data) {
+                    self.collection.add(data.success);
+                    self.collection.sort();
+                    self.render();
+                },
+                error: function(data) {
+                    $('#spin_list_tweets').hide();
                 }
             });
         },
@@ -37,11 +62,11 @@ $(function () {
         render : function() {
             var renderedContent = this.template({ tweets : this.collection.toJSON() });
             $('#spin_list_tweets').hide();
-            $('#tweets').html(renderedContent).toggle();
+            $('#tweets').html(renderedContent).show();
             return this;
         }
     });
 
-    view = new TweetsCollectionView({ collection : new Tweets() });
+    viewTweets = new TweetsCollectionView({ collection : new Tweets() });
 
 });

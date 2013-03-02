@@ -107,6 +107,13 @@ class User
      */
     private $subscriptions;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nb_subscriptions", type="integer", length=255)
+     */
+    private $nb_subscriptions = 0;
+
     public function __toString()
     {
         return $this->screen_name;
@@ -385,9 +392,32 @@ class User
     }
 
     /**
+     * Set nb_subscriptions
+     *
+     * @param integer $nb_subscriptions
+     * @return User
+     */
+    public function setNbSubscriptions($nb_subscriptions)
+    {
+        $this->nb_subscriptions = $nb_subscriptions;
+
+        return $this;
+    }
+
+    /**
+     * Get nb_subscriptions
+     *
+     * @return integer
+     */
+    public function getNbSubscriptions()
+    {
+        return $this->nb_subscriptions;
+    }
+
+    /**
      * Get roles
      *
-     * @return string
+     * @return integer
      */
     public function getRoles()
     {
@@ -450,6 +480,7 @@ class User
     public function removeSubscription(\Sweepo\StreamBundle\Entity\Subscription $subscriptions)
     {
         $this->subscriptions->removeElement($subscriptions);
+        $this->nb_subscriptions--;
     }
 
     /**

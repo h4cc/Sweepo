@@ -14,14 +14,4 @@ use Sweepo\UserBundle\Entity\User;
  */
 class SubscriptionRepository extends EntityRepository
 {
-    public function findByKeywords(User $user)
-    {
-        $qb = $this->createQueryBuilder('s');
-
-        return $qb->select('s.subscription')
-            ->where('s.user = :user')
-            ->setParameter('user', $user)
-            ->getQuery()
-            ->getResult();
-    }
 }

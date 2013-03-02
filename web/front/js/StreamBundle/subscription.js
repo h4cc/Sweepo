@@ -72,6 +72,8 @@ $(function(){
                     if ( $('#no_subscriptions').is(':visible') ) {
                         $('#no_subscriptions').hide();
                     }
+
+                    viewTweets.loadTweets();
                 },
                 error: function(data) {
                     currentTarget.children('i').removeClass('icon-spinner icon-spin').addClass('icon-plus');
@@ -125,5 +127,5 @@ $(function(){
         }
     });
 
-    view = new SubscriptionsCollectionView({ collection : new Subscriptions() });
+    viewSubscriptions = new SubscriptionsCollectionView({ collection : new Subscriptions() });
 });

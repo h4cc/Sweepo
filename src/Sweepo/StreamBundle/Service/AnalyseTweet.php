@@ -9,26 +9,34 @@ class AnalyseTweet
 {
     private $tweetsSaved;
 
-    public function analyseCollection($tweets, $subscriptions)
+    public function __construct()
+    {
+        $this->tweetsSaved = [];
+    }
+
+    public function analyseCollection($tweets, $subscriptions, $arrayTweetId)
     {
         foreach ($tweets as $tweet) {
             $text = strtolower($tweet->text);
 
-            array_walk($subscriptions, function(&$subscription) {
-                $subscription = strtolower($subscription);
-            });
-
             foreach ($subscriptions as $subscription) {
 
                 // If the subscription is an @screen_name format
-                if (preg_match('/^\@/', $subscription)) {
-                    if ($subscription === '@' . strtolower($tweet->user->screen_name)) {
-                        $this->addTweet($tweet);
+                if (preg_match('/^\@/', strtolower($subscription->getSubscription()))) {
+
+                    if (strtolower($subscription->getSubscription()) === '@' . strtolower($tweet->user->screen_name)) {
+
+                        if (false === $this->alreadyAdded($tweet->id_str, $arrayTweetId)) {
+                            $this->addTweet($tweet);
+                        }
                     }
                 // Else we search just the keyword in text
                 } else {
-                    if (preg_match('/' . $subscription . '/', $text)) {
-                        $this->addTweet($tweet);
+                    if (preg_match('/' . strtolower($subscription->getSubscription()) . '/', $text)) {
+
+                        if (false === $this->alreadyAdded($tweet->id_str, $arrayTweetId)) {
+                            $this->addTweet($tweet);
+                        }
                     }
                 }
             }
@@ -46,8 +54,8 @@ class AnalyseTweet
         $tweet->setTweetId($rawTweet->id);
         $tweet->setTweetCreatedAt(new \DateTime($rawTweet->created_at));
         $tweet->setInReplyToScreenName($rawTweet->in_reply_to_screen_name); // TODO
-        $tweet->setIsRetweeted(false);
         $tweet->setCreatedAt(new \DateTime());
+        $tweet->setIsRetweeted(false);
         $tweet->setText($rawTweet->text);
         $tweet->setOwnerId($rawTweet->user->id);
         $tweet->setOwnerName($rawTweet->user->name);
@@ -70,13 +78,25 @@ class AnalyseTweet
 
     private function addTweet($tweet)
     {
-        $this->tweetsSaved[] = $tweet;
+        $this->tweetsSaved[] = $this->createTweet($tweet);
+    }
+
+    private function alreadyAdded($id, $arrayTweetId)
+    {
+        foreach ($arrayTweetId as $tweet_id) {
+            if ($id === $tweet_id['tweet_id']) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function textHandler($tweet)
     {
         if (true === $this->isRetweeted($tweet)) {
             $tweet->text = substr_replace($tweet->text, '', 0, strpos($tweet->text, ':') + 2);
+            $tweet->is_retweeted = true;
         }
 
         $tweet->text = $this->searchLinks($tweet->text);
@@ -88,7 +108,7 @@ class AnalyseTweet
 
     private function isRetweeted($tweet)
     {
-        if (isset($tweet->retweeted_status) && 'RT' === $str = substr($tweet->text, 0, 2)) {
+        if (isset($tweet->retweeted_status)) {
             return true;
         }
 
@@ -108,7 +128,7 @@ class AnalyseTweet
 
     private function searchMentions($text)
     {
-        preg_match_all('/@[a-zA-Z0-9]+/', $text, $matches);
+        preg_match_all('/@[a-zA-Z0-9_]+/', $text, $matches);
 
         foreach ($matches[0] as $mention) {
             $text = substr_replace($text, '<a href="http://twitter.com/' . $mention . '" class="mention">' . $mention . '</a>', strrpos($text, $mention), strlen($mention));
@@ -119,7 +139,7 @@ class AnalyseTweet
 
     private function searchLinks($text)
     {
-        preg_match_all('/http:\/\/[.\/a-zA-Z0-9]+/', $text, $matches);
+        preg_match_all('/http(s)*:\/\/[.\/a-zA-Z0-9]+/', $text, $matches);
 
         foreach ($matches[0] as $link) {
             $text = substr_replace($text, '<a href="' . $link . '" class="link">' . $link . '</a>', strrpos($text, $link), strlen($link));

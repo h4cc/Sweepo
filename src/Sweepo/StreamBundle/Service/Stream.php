@@ -32,37 +32,46 @@ class Stream
         $this->analyse = $analyse;
     }
 
-    public function getStream(User $user, $sinceId = null)
+    public function getStream(User $user)
     {
-        return $this->em->getRepository('SweepoStreamBundle:Tweet')->getStream($user, $sinceId);
+        $this->fetchTweetsFromTwitter($user);
+
+        return $this->em->getRepository('SweepoStreamBundle:Tweet')->getStream($user);
     }
 
     public function fetchTweetsFromTwitter(User $user)
     {
-        $id = $this->em->getRepository('SweepoStreamBundle:Tweet')->getLastId($user);
+        $subscriptions = $this->em->getRepository('SweepoStreamBundle:Subscription')->findBy(['user' => $user]);
 
-        $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', null !== $id ? ['since_id' => $id, 'count' => 200] : ['count' => 200], $user->getToken(), $user->getTokenSecret());
-        $tweetsRetrieved = array_reverse($tweetsRetrieved);
+        $parameters = ['count' => 200];
 
-        $subscriptions = $this->em->getRepository('SweepoStreamBundle:Subscription')->findByKeywords($user);
+        // If we have added a new subscriptions or we have 0 subscriptions
+        if (count($subscriptions) === $user->getNbSubscriptions()) {
+            $id = $this->em->getRepository('SweepoStreamBundle:Tweet')->getLastId($user);
 
-        foreach ($subscriptions as $subscription) {
-            $arraySubscriptions[] = $subscription['subscription'];
+            if (null !== $id) {
+                $parameters['since_id'] = $id;
+            }
         }
 
-        $tweetsAnalysed = $this->analyse->analyseCollection($tweetsRetrieved, $arraySubscriptions);
+        $user->setNbSubscriptions(count($subscriptions));
+        error_log(var_export($parameters, true));
+        $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', $parameters, $user->getToken(), $user->getTokenSecret());
+        $tweetsRetrieved = array_reverse($tweetsRetrieved);
+
+        // Get all the tweet_id to check double
+        $arrayTweetsId = $this->em->getRepository('SweepoStreamBundle:Tweet')->getTweetId($user);
+        $tweetsAnalysed = $this->analyse->analyseCollection($tweetsRetrieved, $subscriptions, $arrayTweetsId);
 
         if (empty($tweetsAnalysed)) {
             return [];
         }
 
         foreach ($tweetsAnalysed as $tweet) {
-            $newTweet = $this->analyse->createTweet($tweet);
-
-            $user->addTweet($newTweet);
+            $user->addTweet($tweet);
             $this->em->persist($user);
 
-            $tweetCollection[] = $newTweet;
+            $tweetCollection[] = $tweet;
         }
 
         $this->em->flush();
