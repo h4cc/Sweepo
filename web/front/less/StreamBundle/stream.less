@@ -17,122 +17,137 @@
     //     background:url('@{pathImages}/images/cross_heading_daily_background.png') repeat-x top left;
     // }
 
-#tweets {
-    display: none;
-    list-style:none;
-    margin:0;
-    width:521px;
-    background:@white;
-    .box-shadow(#d8d8d8);
-    border:1px @greyBorder solid;
+#tweets_container {
+    margin-top:30px;
     position:relative;
-    margin-top:35px;
 
-    .tweet {
-        min-height:60px;
-        padding:11px 17px 11px 17px;
-        border-bottom:1px @greyBorder solid;
-
-        .tweet_container {
-            position: relative;
-            padding:20px 0 0 67px;
-
-            .tweet_img {
-                position:absolute;
-                top:0;
-                left:0;
-            }
-
-            .tweet_name_author {
-                position:absolute;
-                top:0;
-                left:67px;
-                font-weight: bold;
-                width:420px;
-
-                a {
-                    color:@text;
-                    text-decoration: none;
-                }
-
-                a:hover {
-                    color:@blue;
-                    text-decoration: none;
-                }
-
-                .tweet_screen_name {
-                    font-weight: normal;
-                    font-size: 12px;
-                    color:@grey;
-                }
-
-                .date {
-                    position:absolute;
-                    top:0px;
-                    right:0px;
-                    font-weight: normal;
-                    font-size: 12px;
-                    color:@grey;
-                }
-            }
-
-            .tweet_content {
-                margin:2px 0 1px 0;
-
-                .hashtag {
-                    color: @blue;
-                }
-
-                .mention {
-                    color: @blue;
-                }
-
-                .link {
-                    color: @blue;
-                }
-            }
-
-            .tweet_open {
-                margin-bottom:0;
-                font-size: 12px;
-
-                a {
-                    color:@blue;
-                    text-decoration:none;
-                }
-
-                a:hover {
-                    text-decoration:underline;
-                }
-            }
-
-            .retweeted {
-                font-size: 14px;
-                color:@grey;
-                margin-bottom:2px;
-
-                a {
-                    color:@titleGrey;
-                }
-
-                a:hover {
-                    text-decoration:underline;
-                }
-            }
-        }
-
-        .hightlight {
-            color:@hightlight;
-        }
-
-        .hightlight:hover {
-            color:@hightlight;
-            text-decoration:none;
-        }
+    #loading_tweets {
+        .border-radius(0px);
+        height:7px;
+        margin-bottom:0px;
     }
 
-    .tweet:last-child {
-        border-bottom:none;
+    #tweets {
+        list-style:none;
+        margin:0;
+        width:521px;
+        background:@white;
+        .box-shadow(#d8d8d8);
+        border:1px @greyBorder solid;
+        position:relative;
+
+        .tweets_loading {
+            text-align: center;
+            line-height: 60px;
+            color:@grey;
+        }
+
+        .tweet {
+            min-height:60px;
+            padding:11px 17px 11px 17px;
+            border-bottom:1px @greyBorder solid;
+
+            .tweet_container {
+                position: relative;
+                padding:20px 0 0 67px;
+
+                .tweet_img {
+                    position:absolute;
+                    top:0;
+                    left:0;
+                }
+
+                .tweet_name_author {
+                    position:absolute;
+                    top:0;
+                    left:67px;
+                    font-weight: bold;
+                    width:420px;
+
+                    a {
+                        color:@text;
+                        text-decoration: none;
+                    }
+
+                    a:hover {
+                        color:@blue;
+                        text-decoration: none;
+                    }
+
+                    .tweet_screen_name {
+                        font-weight: normal;
+                        font-size: 12px;
+                        color:@grey;
+                    }
+
+                    .date {
+                        position:absolute;
+                        top:0px;
+                        right:0px;
+                        font-weight: normal;
+                        font-size: 12px;
+                        color:@grey;
+                    }
+                }
+
+                .tweet_content {
+                    margin:2px 0 1px 0;
+
+                    .hashtag {
+                        color: @blue;
+                    }
+
+                    .mention {
+                        color: @blue;
+                    }
+
+                    .link {
+                        color: @blue;
+                    }
+                }
+
+                .tweet_open {
+                    margin-bottom:0;
+                    font-size: 12px;
+
+                    a {
+                        color:@blue;
+                        text-decoration:none;
+                    }
+
+                    a:hover {
+                        text-decoration:underline;
+                    }
+                }
+
+                .retweeted {
+                    font-size: 14px;
+                    color:@grey;
+                    margin-bottom:2px;
+
+                    a {
+                        color:@titleGrey;
+                    }
+
+                    a:hover {
+                        text-decoration:underline;
+                    }
+                }
+            }
+
+            .hightlight {
+                color:@hightlight;
+            }
+
+            .hightlight:hover {
+                color:@hightlight;
+                text-decoration:none;
+            }
+        }
+
+        .tweet:last-child {
+            border-bottom:none;
+        }
     }
 }
 

@@ -36,14 +36,14 @@ $(function () {
                     self.render();
                 },
                 error: function(data) {
-                    $('#spin_list_tweets').hide();
+                    $('#loading_tweets').hide();
                 }
             });
         },
 
         loadTweets : function () {
             var self = this;
-            $('#spin_list_tweets').show();
+            $('#loading_tweets').show();
 
             $.ajax({
                 type : 'GET',
@@ -54,15 +54,15 @@ $(function () {
                     self.render();
                 },
                 error: function(data) {
-                    $('#spin_list_tweets').hide();
+                    $('#loading_tweets').hide();
                 }
             });
         },
 
         render : function() {
             var renderedContent = this.template({ tweets : this.collection.toJSON() });
-            $('#spin_list_tweets').hide();
-            $('#tweets').html(renderedContent).show();
+            $('#loading_tweets').hide();
+            $('#tweets').html(renderedContent);
             return this;
         }
     });

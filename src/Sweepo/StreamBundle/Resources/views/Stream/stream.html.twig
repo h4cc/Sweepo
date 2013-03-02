@@ -1,9 +1,18 @@
 {% extends 'SweepoCoreBundle:Layouts:layout.html.twig' %}
 
 {% block container %}
-    <p id="spin_list_tweets"><i class="icon icon-spin icon-spinner"></i></p>
-    <button id="refresh_stream" class="btn"><i class="icon icon-refresh"></i></button>
-    <ul id="tweets"></ul>
+
+    <div id="tweets_container">
+        <div id="loading_tweets" class="progress progress-striped active">
+            <div class="bar" style="width: 100%;"></div>
+        </div>
+        <ul id="tweets">
+            <li class="tweet tweets_loading">
+                <i class="icon icon-twitter icon-margin"></i> Tweets loading ...
+            </li>
+        </ul>
+    </div>
+
 {% endblock %}
 
 {% block sidebar %}
