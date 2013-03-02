@@ -2,16 +2,20 @@
 
 namespace Sweepo\StreamBundle\Service;
 
+use Symfony\Component\Translation\TranslatorInterface;
+
 use Sweepo\StreamBundle\Entity\Tweet;
 use Sweepo\StreamBundle\Entity\Subscription;
 use Sweepo\UserBundle\Entity\User;
 
 class AnalyseTweet
 {
+    private $translator;
     private $tweetsSaved;
 
-    public function __construct()
+    public function __construct(TranslatorInterface $translator)
     {
+        $this->translator = $translator;
         $this->tweetsSaved = [];
     }
 
@@ -28,7 +32,7 @@ class AnalyseTweet
                     if (strtolower($subscription->getSubscription()) === '@' . strtolower($tweet->user->screen_name)) {
 
                         if (false === $this->alreadyAdded($tweet->id_str, $arrayTweetId)) {
-                            $this->addTweet($tweet);
+                            $this->addTweet($tweet, $subscription);
                         }
                     }
 
@@ -37,11 +41,7 @@ class AnalyseTweet
                     if (preg_match('/' . strtolower($subscription->getSubscription()) . '/', $text)) {
 
                         if (false === $this->alreadyAdded($tweet->id_str, $arrayTweetId)) {
-
-                            // handleText to place hightlight on keyword
-                            $tweet->text = $this->placeKeywordHightlight($tweet->text, $subscription->getSubscription());
-
-                            $this->addTweet($tweet);
+                            $this->addTweet($tweet, $subscription);
                         }
                     }
                 }
@@ -51,12 +51,18 @@ class AnalyseTweet
         return $this->tweetsSaved;
     }
 
-    public function createTweet($rawTweet)
+    private function addTweet($tweet, Subscription $subscription)
     {
-        $rawTweet = $this->textHandler($rawTweet);
+        $this->tweetsSaved[] = $this->createTweet($tweet, $subscription);
+    }
+
+    private function createTweet($rawTweet, Subscription $subscription)
+    {
+        $rawTweet = $this->textHandler($rawTweet, $subscription);
 
         $tweet = new Tweet();
 
+        $tweet->setSubscription($subscription);
         $tweet->setTweetId($rawTweet->id);
         $tweet->setTweetCreatedAt(new \DateTime($rawTweet->created_at));
         $tweet->setInReplyToScreenName($rawTweet->in_reply_to_screen_name); // TODO
@@ -82,11 +88,6 @@ class AnalyseTweet
         return $tweet;
     }
 
-    private function addTweet($tweet)
-    {
-        $this->tweetsSaved[] = $this->createTweet($tweet);
-    }
-
     private function alreadyAdded($id, $arrayTweetId)
     {
         foreach ($arrayTweetId as $tweet_id) {
@@ -98,11 +99,15 @@ class AnalyseTweet
         return false;
     }
 
-    private function textHandler($tweet)
+    private function textHandler($tweet, Subscription $subscription)
     {
         if (true === $this->isRetweeted($tweet)) {
             $tweet->text = substr_replace($tweet->text, '', 0, strpos($tweet->text, ':') + 2);
             $tweet->is_retweeted = true;
+        }
+
+        if ($subscription->getType() === Subscription::TYPE_KEYWORD) {
+            $tweet->text = $this->placeKeywordHightlight($tweet->text, $subscription->getSubscription());
         }
 
         $tweet->text = $this->searchLinks($tweet->text);
@@ -128,7 +133,7 @@ class AnalyseTweet
         preg_match_all('/' . $keyword . '/', $text, $matches);
 
         foreach ($matches[0] as $match) {
-            $text = substr_replace($text, '<span class="hightlight">' . $match . '</span>', strrpos($text, $match), strlen($match));
+            $text = substr_replace($text, '<span class="hightlight" data-toggle="tooltip" data-title="' . $this->translator->trans('subscription') . ' : ' . $keyword . '">' . $match . '</span>', strrpos($text, $match), strlen($match));
         }
 
         return $text;

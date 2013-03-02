@@ -31,7 +31,7 @@ class ApiTweetController extends Controller
                 }
 
                 array_walk($tweets, function (Tweet &$tweet) {
-                    $tweet = $tweet->toArray();
+                    $tweet = $tweet->toArray(false);
                 });
 
                 return $this->get('sweepo.api.response')->successResponse($tweets);
@@ -56,7 +56,7 @@ class ApiTweetController extends Controller
         }
 
         array_walk($tweets, function (Tweet &$tweet) {
-            $tweet = $tweet->toArray();
+            $tweet = $tweet->toArray(false);
         });
 
         return $this->get('sweepo.api.response')->successResponse($tweets);

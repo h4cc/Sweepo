@@ -5,7 +5,11 @@
                 <img src="<%= tweet.owner_profile_image_url %>" width="57px" height="57px" class="img-rounded tweet_img"/>
                 <p class="tweet_name_author">
                     <a href="http://twitter.com/<%= tweet.owner_screen_name %>"><%= tweet.owner_name %></a>
-                    <span class="tweet_screen_name">@<%= tweet.owner_screen_name %></span>
+                    <% if (tweet.subscription.type == 'user') { %>
+                        <span class="tweet_screen_name hightlight" data-toggle="tooltip" data-title="{{ 'subscription' | trans }} : <%= tweet.subscription.subscription%>">@<%= tweet.owner_screen_name %></span>
+                    <% } else { %>
+                        <span class="tweet_screen_name">@<%= tweet.owner_screen_name %></span>
+                    <% } %>
                     <span class="date"><%= tweet.tweet_created_at %></span>
                 </p>
                 <p class="tweet_content">

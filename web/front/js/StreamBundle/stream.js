@@ -22,7 +22,7 @@ $(function () {
         },
 
         events : {
-            'click #refresh_stream' : 'loadTweets',
+            'click #refresh_stream' : 'loadTweets'
         },
 
         fetchTweets : function () {
@@ -63,6 +63,7 @@ $(function () {
             var renderedContent = this.template({ tweets : this.collection.toJSON() });
             $('#loading_tweets').hide();
             $('#tweets').html(renderedContent);
+            $('.hightlight').tooltip();
             return this;
         }
     });

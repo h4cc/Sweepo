@@ -4,6 +4,8 @@ namespace Sweepo\StreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Sweepo\StreamBundle\Entity\Subscription;
+
 /**
  * Tweet
  *
@@ -113,6 +115,14 @@ class Tweet
      */
     private $created_at;
 
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Sweepo\StreamBundle\Entity\Subscription", inversedBy="tweets")
+     * @ORM\JoinColumn(name="subscription_id", referencedColumnName="id")
+     */
+    private $subscription;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -137,8 +147,9 @@ class Tweet
 
         if (!$short) {
             $array = array_merge($array, [
-                'user'       => $this->user->toArray(),
-                'created_at' => $this->created_at,
+                'user'         => $this->user->toArray(),
+                'subscription' => $this->subscription->toArray(),
+                'created_at'   => $this->created_at,
             ]);
         }
 
@@ -452,5 +463,28 @@ class Tweet
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set subscription
+     *
+     * @param \Sweepo\StreamBundle\Entity\Subscription $subscription
+     * @return Tweet
+     */
+    public function setSubscription(\Sweepo\StreamBundle\Entity\Subscription $subscription = null)
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
+
+    /**
+     * Get subscription
+     *
+     * @return \Sweepo\StreamBundle\Entity\Subscription
+     */
+    public function getSubscription()
+    {
+        return $this->subscription;
     }
 }

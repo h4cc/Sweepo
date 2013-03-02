@@ -2,6 +2,7 @@
 
 namespace Sweepo\StreamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,9 +54,15 @@ class Subscription
      */
     private $created_at;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Tweet", mappedBy="subscription", cascade={"remove"})
+     */
+    private $tweets;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->tweets = new ArrayCollection();
     }
 
     public function toArray($short = true)
@@ -183,5 +190,39 @@ class Subscription
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add tweets
+     *
+     * @param \Sweepo\StreamBundle\Entity\Tweet $tweets
+     * @return User
+     */
+    public function addTweet(\Sweepo\StreamBundle\Entity\Tweet $tweets)
+    {
+        $tweets->setUser($this);
+        $this->tweets[] = $tweets;
+
+        return $this;
+    }
+
+    /**
+     * Remove tweets
+     *
+     * @param \Sweepo\StreamBundle\Entity\Tweet $tweets
+     */
+    public function removeTweet(\Sweepo\StreamBundle\Entity\Tweet $tweets)
+    {
+        $this->tweets->removeElement($tweets);
+    }
+
+    /**
+     * Get tweets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTweets()
+    {
+        return $this->tweets;
     }
 }
