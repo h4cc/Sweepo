@@ -55,7 +55,7 @@ class Stream
         }
 
         $user->setNbSubscriptions(count($subscriptions));
-        error_log(var_export($parameters, true));
+
         $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', $parameters, $user->getToken(), $user->getTokenSecret());
         $tweetsRetrieved = array_reverse($tweetsRetrieved);
 
@@ -64,6 +64,9 @@ class Stream
         $tweetsAnalysed = $this->analyse->analyseCollection($tweetsRetrieved, $subscriptions, $arrayTweetsId);
 
         if (empty($tweetsAnalysed)) {
+            $this->em->persist($user);
+            $this->em->flush();
+
             return [];
         }
 

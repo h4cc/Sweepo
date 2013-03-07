@@ -10,7 +10,7 @@
                     <% } else { %>
                         <span class="tweet_screen_name">@<%= tweet.owner_screen_name %></span>
                     <% } %>
-                    <span class="date"><%= tweet.tweet_created_at %></span>
+                    <span class="date"><%= tweet.tweet_created_at.date %></span>
                 </p>
                 <p class="tweet_content">
                     <%= tweet.text %>

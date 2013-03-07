@@ -18,6 +18,7 @@ class StreamController extends Controller
      */
     public function streamAction()
     {
+        $this->get('sweepo.stream')->getStream($this->getUser());
         return [
             'user' => $this->getUser(),
         ];
