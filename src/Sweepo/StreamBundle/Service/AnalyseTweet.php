@@ -19,6 +19,13 @@ class AnalyseTweet
         $this->tweetsSaved = [];
     }
 
+    /**
+     * Analayse a collection of tweets. For each tweets, we check if there is a subscription for it
+     * @param  array $tweets        Tweet retrieve from Twitter
+     * @param  array $subscriptions The User subscriptions
+     * @param  array $arrayTweetId  This is the array of the actuals tweets id. This is use to detect duplicate tweets
+     * @return array                The new tweets fetched by the analyse
+     */
     public function analyseCollection($tweets, $subscriptions, $arrayTweetId)
     {
         foreach ($tweets as $tweet) {
@@ -51,11 +58,22 @@ class AnalyseTweet
         return $this->tweetsSaved;
     }
 
+    /**
+     * Add a new Tweet
+     * @param JsonObject $tweet Tweet must to be added
+     * @param Subscription $subscription The correspondant subscription
+     */
     private function addTweet($tweet, Subscription $subscription)
     {
         $this->tweetsSaved[] = $this->createTweet($tweet, $subscription);
     }
 
+    /**
+     * Create a Tweet entity from a Twitter Tweet
+     * @param  JsonObject   $rawTweet
+     * @param  Subscription $subscription
+     * @return Tweet
+     */
     private function createTweet($rawTweet, Subscription $subscription)
     {
         $rawTweet = $this->textHandler($rawTweet, $subscription);
@@ -88,6 +106,12 @@ class AnalyseTweet
         return $tweet;
     }
 
+    /**
+     * Test to check if a tweet has already been added
+     * @param  int   $id The tweet id
+     * @param  array $arrayTweetId
+     * @return boolean
+     */
     private function alreadyAdded($id, $arrayTweetId)
     {
         foreach ($arrayTweetId as $tweet_id) {
@@ -99,24 +123,42 @@ class AnalyseTweet
         return false;
     }
 
+    /**
+     * Handle the text field of a Tweet. Add hightlight for keyword of remove the RT mention for retweeted tweets
+     * @param  JsonObject $tweet
+     * @param  Subscription $subscription
+     * @return JsonObject
+     */
     private function textHandler($tweet, Subscription $subscription)
     {
+        // Here we remoive the RT mention
         if (true === $this->isRetweeted($tweet)) {
             $tweet->text = substr_replace($tweet->text, '', 0, strpos($tweet->text, ':') + 2);
             $tweet->is_retweeted = true;
         }
 
+        // hightlight the keyword
         if ($subscription->getType() === Subscription::TYPE_KEYWORD) {
             $tweet->text = $this->placeKeywordHightlight($tweet->text, $subscription->getSubscription());
         }
 
+        // Add link
         $tweet->text = $this->searchLinks($tweet->text);
+
+        // Add hashtag
         $tweet->text = $this->searchHashtag($tweet->text);
+
+        // Add mentions
         $tweet->text = $this->searchMentions($tweet->text);
 
         return $tweet;
     }
 
+    /**
+     * Is retweeted ?
+     * @param  JsonObject $tweet
+     * @return boolean
+     */
     private function isRetweeted($tweet)
     {
         if (isset($tweet->retweeted_status)) {
