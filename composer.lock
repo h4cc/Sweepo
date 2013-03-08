@@ -1,5 +1,5 @@
 {
-    "hash": "7e8f58af0858bef0d7e5139dfee3f329",
+    "hash": "585a3608ea9f8655eb325602b1324fe1",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -844,6 +844,49 @@
             ]
         },
         {
+            "name": "sensio/buzz-bundle",
+            "version": "dev-master",
+            "target-dir": "Sensio/Bundle/BuzzBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sensio/SensioBuzzBundle.git",
+                "reference": "942546e209514740c973097450fc6ff2e03d76af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensio/SensioBuzzBundle/zipball/942546e209514740c973097450fc6ff2e03d76af",
+                "reference": "942546e209514740c973097450fc6ff2e03d76af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "kriswallsmith/buzz": ">= 0.6"
+            },
+            "time": "2013-01-17 15:47:23",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Sensio\\Bundle\\BuzzBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Weistroff",
+                    "email": "marc.weistroff@sensio.com"
+                }
+            ],
+            "description": "Bundle around the Buzz HTTP client",
+            "homepage": "https://github.com/sensio/SensioBuzzBundle",
+            "keywords": [
+                "http client",
+                "buzz"
+            ]
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "v2.1.8",
             "target-dir": "Sensio/Bundle/DistributionBundle",
@@ -1405,6 +1448,6 @@
         "kriswallsmith/assetic": 20,
         "abraham/twitteroauth": 20,
         "friendsofsymfony/jsrouting-bundle": 20,
-        "kriswallsmith/buzz": 20
+        "sensio/buzz-bundle": 20
     }
 }

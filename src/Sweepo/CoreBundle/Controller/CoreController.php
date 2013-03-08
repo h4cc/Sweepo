@@ -16,14 +16,14 @@ class CoreController extends Controller
      */
     public function testAction()
     {
-        $mandrill = $this->get('sweepo.mandrill');
-        $mandrill->setHtml('<p>html</p>');
-        $mandrill->setTexte('text');
-        $mandrill->setSubject('Subject');
-        $mandrill->setTo('r.gazelot@gmail.com');
-        $mandrill->setFrom('daily@sweepo.fr', 'Sweepo');
+        // $mandrill = $this->get('sweepo.mandrill');
+        // $mandrill->setHtml('<p>html</p>');
+        // $mandrill->setText('text');
+        // $mandrill->setSubject('Subject');
+        // $mandrill->setTo('r.gazelot@gmail.com');
+        // $mandrill->setFrom('daily@sweepo.fr', 'Sweepo');
 
-        $mandrill->send();
+        // $mandrill->send();
 
 
 

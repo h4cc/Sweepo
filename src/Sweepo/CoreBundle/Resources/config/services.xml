@@ -28,7 +28,8 @@
             <tag name="twig.extension" />
         </service>
         <service id="sweepo.mandrill" class="%sweepo.mandrill.class%">
-
+            <argument type="service" id="buzz" />
+            <argument>%mandrill_api_key%</argument>
         </service>
     </services>
 </container>

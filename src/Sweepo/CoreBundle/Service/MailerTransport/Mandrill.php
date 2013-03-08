@@ -2,6 +2,12 @@
 
 namespace Sweepo\CoreBundle\Service\MailerTransport;
 
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+
+use Buzz\Browser as Buzz;
+
 /**
  *  See the do of the API :
  *  https://mandrillapp.com/api/docs/messages.html
@@ -61,10 +67,8 @@ class Mandrill
         $serializer = new Serializer([new GetSetMethodNormalizer()], [new JsonEncoder()]);
         $data = $serializer->serialize($this, 'json');
 
-        die(var_dump('ok'));
-
         // Mandrill
-        return $this->buzz->post('https://mandrillapp.com/api/1.0/messages/send.json', array(), $data)->isSuccessful();
+        return $this->buzz->post('https://mandrillapp.com/api/1.0/messages/send.json', array(), $data);
     }
 
     /**
