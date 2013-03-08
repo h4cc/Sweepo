@@ -8,6 +8,7 @@
         <parameter key="sweepo.twitter.class">Sweepo\CoreBundle\Service\Twitter</parameter>
         <parameter key="sweepo.locale.listener.class">Sweepo\CoreBundle\Listener\LocaleListener</parameter>
         <parameter key="sweepo.twig.date_extension.class">Sweepo\CoreBundle\Twig\DateExtension</parameter>
+        <parameter key="sweepo.mandrill.class">Sweepo\CoreBundle\Service\MailerTransport\Mandrill</parameter>
     </parameters>
 
     <services>
@@ -25,6 +26,9 @@
         <service id="sweepo.twig.date_extension" class="%sweepo.twig.date_extension.class%">
             <argument type="service" id="translator" />
             <tag name="twig.extension" />
+        </service>
+        <service id="sweepo.mandrill" class="%sweepo.mandrill.class%">
+
         </service>
     </services>
 </container>
