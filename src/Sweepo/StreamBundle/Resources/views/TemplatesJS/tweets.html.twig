@@ -5,7 +5,7 @@
                 <img src="<%= tweet.owner_profile_image_url %>" width="57px" height="57px" class="img-rounded tweet_img"/>
                 <p class="tweet_name_author">
                     <a href="http://twitter.com/<%= tweet.owner_screen_name %>"><%= tweet.owner_name %></a>
-                    <% if (tweet.subscription.type == 'user') { %>
+                    <% if (tweet.subscription.type == 'user' && tweet.is_retweeted == false) { %>
                         <span class="tweet_screen_name hightlight" data-toggle="tooltip" data-title="{{ 'subscription' | trans }} : <%= tweet.subscription.subscription%>">@<%= tweet.owner_screen_name %></span>
                     <% } else { %>
                         <span class="tweet_screen_name">@<%= tweet.owner_screen_name %></span>
@@ -16,7 +16,7 @@
                     <%= tweet.text %>
                 </p>
                 <% if (tweet.is_retweeted == true) { %>
-                    <p class="retweeted"><i class="icon icon-retweet icon-margin"></i>Retweeted by <a href="http://twitter.com/<%= tweet.raw_user_screen_name %>"><%= tweet.raw_user_name %></a></p>
+                    <p class="retweeted"><i class="icon icon-retweet icon-margin"></i>Retweeted by <a href="http://twitter.com/<%= tweet.raw_user_screen_name %>" class="hightlight" data-toggle="tooltip" data-title="{{ 'subscription' | trans }} : <%= tweet.subscription.subscription%>"><%= tweet.raw_user_name %></a></p>
                 <% } %>
                 <p class="tweet_open"><a href="http://twitter.com/<%= tweet.owner_screen_name %>/status/<%= tweet.tweet_id %>">open on Twitter</a></p>
             </div>

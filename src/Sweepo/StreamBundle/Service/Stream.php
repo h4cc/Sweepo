@@ -45,6 +45,8 @@ class Stream
 
         $parameters = ['count' => 200];
 
+        error_log(var_export($user->getNbSubscriptions(), true));
+
         // If we have added a new subscriptions or we have 0 subscriptions
         if (count($subscriptions) === $user->getNbSubscriptions()) {
             $id = $this->em->getRepository('SweepoStreamBundle:Tweet')->getLastId($user);
@@ -55,6 +57,9 @@ class Stream
         }
 
         $user->setNbSubscriptions(count($subscriptions));
+
+        error_log(var_export($user->getNbSubscriptions(), true));
+        error_log(var_export($parameters, true));
 
         $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', $parameters, $user->getToken(), $user->getTokenSecret());
         $tweetsRetrieved = array_reverse($tweetsRetrieved);

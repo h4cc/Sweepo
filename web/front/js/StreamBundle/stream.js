@@ -65,6 +65,7 @@ $(function () {
         },
 
         render : function() {
+            console.log(this.collection.toJSON());
             var renderedContent = this.template({ tweets : this.collection.toJSON() });
             $('#loading_tweets').hide();
             $('#tweets').html(renderedContent);
