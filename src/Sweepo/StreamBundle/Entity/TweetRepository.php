@@ -33,11 +33,23 @@ class TweetRepository extends EntityRepository
         return $id;
     }
 
-    public function getStream(User $user)
+    /**
+     * Get the stream
+     * @param  User     $user User concerned
+     * @param  DateTime $date Used in crontab task for daily email. We specified the date
+     *                        to get all the tweet with a created date greater than today
+     */
+    public function getStream(User $user, $date = null)
     {
-        return $this->createQueryBuilder('t')
-            ->where('t.user = :user')
-            ->orderBy('t.tweet_created_at', 'DESC')
+        $qb = $this->createQueryBuilder('t')
+            ->where('t.user = :user');
+
+        if (null !== $date) {
+            $qb->andWhere($qb->expr()->gte('t.tweet_created_at', '?1'))
+                ->setParameter(1, $date);
+        }
+
+        return $qb->orderBy('t.tweet_created_at', 'DESC')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();

@@ -31,4 +31,11 @@ class UserRepository extends EntityRepository
 
         return $user;
     }
+
+    public function getUsersForSending()
+    {
+        return $this->createQueryBuilder('u')
+            ->getQuery()
+            ->getResult();
+    }
 }
