@@ -9,6 +9,7 @@
         <parameter key="sweepo.locale.listener.class">Sweepo\CoreBundle\Listener\LocaleListener</parameter>
         <parameter key="sweepo.twig.date_extension.class">Sweepo\CoreBundle\Twig\DateExtension</parameter>
         <parameter key="sweepo.mandrill.class">Sweepo\CoreBundle\Service\MailerTransport\Mandrill</parameter>
+        <parameter key="sweepo.mailer.class">Sweepo\CoreBundle\Service\MailerTransport\Mailer</parameter>
     </parameters>
 
     <services>
@@ -27,9 +28,13 @@
             <argument type="service" id="translator" />
             <tag name="twig.extension" />
         </service>
-        <service id="sweepo.mandrill" class="%sweepo.mandrill.class%">
+        <service id="sweepo.mandrill" class="%sweepo.mandrill.class%" public="false">
             <argument type="service" id="buzz" />
             <argument>%mandrill_api_key%</argument>
+        </service>
+        <service id="sweepo.mailer" class="%sweepo.mailer.class%">
+            <argument type="service" id="twig" />
+            <argument type="service" id="sweepo.mandrill" />
         </service>
     </services>
 </container>
