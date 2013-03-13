@@ -18,6 +18,8 @@ class Twitter
      */
     private $consumerSecret;
 
+    private $twitterCallback;
+
     /**
      * Session service
      * @var Session
@@ -35,10 +37,11 @@ class Twitter
      * @param string  $consumerSecret
      * @param Session $session         Session service
      */
-    public function __construct($consumerKey, $consumerSecret, Session $session)
+    public function __construct($consumerKey, $consumerSecret, $twitterCallback, Session $session)
     {
         $this->consumerKey = $consumerKey;
         $this->consumerSecret = $consumerSecret;
+        $this->twitterCallback = $twitterCallback;
         $this->session = $session;
     }
 
@@ -49,7 +52,7 @@ class Twitter
     public function init()
     {
         $connection = $this->getConnection();
-        $request_token = $connection->getRequestToken('http://sweepo.dev/app_dev.php/login-check');
+        $request_token = $connection->getRequestToken($this->twitterCallback);
 
         $this->session->set('oauth_token', $request_token['oauth_token']);
         $this->session->set('oauth_token_secret', $request_token['oauth_token_secret']);

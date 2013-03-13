@@ -22,3 +22,5 @@ parameters:
 
     consumer_key: ImVoQj3CacBycRQQ07GVQ
     consumer_secret: jU0whKNIrB9s93FrCTsopesZ2mjg4tZcneSmDNUG0
+
+    twitter_callback: http://sweepo.dev/app_dev.php/login-check

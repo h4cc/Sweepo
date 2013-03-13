@@ -16,6 +16,7 @@
         <service id="sweepo.twitter" class="%sweepo.twitter.class%">
             <argument>%consumer_key%</argument>
             <argument>%consumer_secret%</argument>
+            <argument>%twitter_callback%</argument>
             <argument type="service" id="session" />
         </service>
         <service id="sweepo.locale.listener" class="%sweepo.locale.listener.class%" scope="request">
