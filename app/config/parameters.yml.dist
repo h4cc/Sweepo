@@ -1,0 +1,24 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     ~
+    database_name:     sweepo_dev
+    database_user:     root
+    database_password: root
+
+    mailer_transport:  smtp
+    mailer_host:       localhost
+    mailer_user:       ~
+    mailer_password:   ~
+    mandrill_api_key:  2804ca70-d8a8-4c52-aac3-2ec7d56a457d
+
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    node_base_path: /usr/local/bin/node
+    node_lib_path: /usr/local/lib/node
+    node_modules_path: /usr/local/share/npm/lib/node_modules #/usr/local/share/npm/lib/node_modules/less
+    jar_file: /Resources/java/yuicompressor-2.4.7.jar
+
+    consumer_key: ImVoQj3CacBycRQQ07GVQ
+    consumer_secret: jU0whKNIrB9s93FrCTsopesZ2mjg4tZcneSmDNUG0
