@@ -5,6 +5,7 @@ logout: "Se déconnecter"
 add: "Ajouter"
 added: "ajouté !"
 delete: "Supprimer"
+loading: "chargement"
 
 # Months
 january: "janvier"
@@ -30,3 +31,11 @@ connect_twitter: "Connexion avec Twitter"
 subscriptions: "Abonnements"
 add_subscription: "Ajoutez un abonnement"
 no_subscriptions: "Il n'y a pas d'abonnements"
+retweeted_by: "Retweeté par"
+open_on: "Ouvrir sur"
+
+# Mailing
+daily_email_subject: "Les nouvelles journalières de votre flux"
+
+## daily.html.twig
+daily_email_link_to_sweepo: "Retrouver votre flux au-travers d'une meilleure expérience sur"

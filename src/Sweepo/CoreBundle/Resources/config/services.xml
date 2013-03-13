@@ -35,6 +35,7 @@
         <service id="sweepo.mailer" class="%sweepo.mailer.class%">
             <argument type="service" id="twig" />
             <argument type="service" id="sweepo.mandrill" />
+            <argument type="service" id="translator" />
         </service>
     </services>
 </container>

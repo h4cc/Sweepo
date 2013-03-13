@@ -5,6 +5,7 @@ logout: "Logout"
 add: "Add"
 added: "added !"
 delete: "Delete"
+loading: "loading"
 
 # Months
 january: "january"
@@ -30,3 +31,11 @@ connect_twitter: "Connect with Twitter"
 subscriptions: "Subscriptions"
 add_subscription: "Add a subscription"
 no_subscriptions: "There are no subscriptions"
+retweeted_by: "Retweeted by"
+open_on: "Open on"
+
+# Mailing
+daily_email_subject: "Daily news in your stream"
+
+## daily.html.twig
+daily_email_link_to_sweepo: "Find your stream with better user experience on"

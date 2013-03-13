@@ -82,7 +82,11 @@ class AnalyseTweet
 
         $tweet->setSubscription($subscription);
         $tweet->setTweetId($rawTweet->id);
-        $tweet->setTweetCreatedAt(new \DateTime($rawTweet->created_at));
+
+        $tweetCreatedAt = new \DateTime($rawTweet->created_at);
+        $tweetCreatedAt->add(new \DateInterval('PT1H'));
+        $tweet->setTweetCreatedAt($tweetCreatedAt);
+
         $tweet->setInReplyToScreenName($rawTweet->in_reply_to_screen_name); // TODO
         $tweet->setCreatedAt(new \DateTime());
         $tweet->setIsRetweeted(false);

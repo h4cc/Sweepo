@@ -30,6 +30,10 @@ class CrontabCommand extends ContainerAwareCommand
             $dateTimeToday = new \DateTime(date('Y-m-d'));
 
             $tweets = $em->getRepository('SweepoStreamBundle:Tweet')->getStream($user, $dateTimeToday);
+
+            if (!empty($tweets)) {
+                $this->getContainer()->get('sweepo.mailer')->send($user, 'daily', ['tweets' => $tweets, 'user' => $user]);
+            }
         }
     }
 }
