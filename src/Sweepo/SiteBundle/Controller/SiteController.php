@@ -19,6 +19,10 @@ class SiteController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if (null !== $this->get('security.context')->getToken()) {
+            return $this->redirect($this->generateUrl('stream'));
+        }
+
         return [];
     }
 
@@ -28,6 +32,10 @@ class SiteController extends Controller
      */
     public function createAction(Request $request)
     {
+        if (null !== $this->get('security.context')->getToken()) {
+            return $this->redirect($this->generateUrl('stream'));
+        }
+
         if (null === $request->query->get('oauth_token') || null === $request->query->get('oauth_token_secret')) {
             $this->get('session')->getFlashBag()->add('error', 'error');
 
