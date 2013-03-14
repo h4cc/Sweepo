@@ -17,7 +17,7 @@
 
 {% block sidebar %}
     <div id="user">
-        <img src="{{ asset('images/portrait.png') }}" width="57px" height="57px" class="img-rounded"/>
+        <img src="{{ user.profileImageUrl }}" width="57px" height="57px" class="img-rounded"/>
         <p class="title">{{ user.name }}</p>
         <p class="screen_name">@{{ user.screenName }}</p>
     </div>
