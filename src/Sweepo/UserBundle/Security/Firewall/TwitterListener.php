@@ -81,12 +81,12 @@ class TwitterListener implements ListenerInterface
                 $twitterUserToken->setTwitterToken($accessToken['oauth_token']);
                 $twitterUserToken->setTwitterTokenSecret($accessToken['oauth_token_secret']);
 
-                $this->authenticate($twitterUserToken, $event);
+                $this->authenticate($twitterUserToken, $event, $accessToken);
             break;
         }
     }
 
-    private function authenticate($twitterUserToken, $event)
+    private function authenticate($twitterUserToken, $event, $accessToken = null)
     {
         try {
             $authToken = $this->twitterProvider->authenticate($twitterUserToken);
