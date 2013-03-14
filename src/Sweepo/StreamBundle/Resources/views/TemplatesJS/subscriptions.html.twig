@@ -2,7 +2,11 @@
     <% _.each(subscriptions, function(subscription) { %>
         <li id="<%= subscription.id %>" class="subscription">
             <span class="<%= subscription.type === 'keyword' ?  'ticket_sub_green' : 'ticket_sub_red' %>"></span>
-            <i class="icon icon-trophy icon_margin"></i>
+            <% if (subscription.type == 'user') { %>
+                <i class="icon icon-user icon_margin"></i>
+            <% } else { %>
+                <i class="icon icon-comment icon_margin"></i>
+            <% } %>
             <%= subscription.subscription %>
             <i class="icon icon-remove-circle"></i>
             <button class="btn btn-danger delete_subscription">{{ 'delete' | trans }} ?</button>
