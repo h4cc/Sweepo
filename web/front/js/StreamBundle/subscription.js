@@ -73,6 +73,7 @@ $(function(){
                         $('#no_subscriptions').hide();
                     }
 
+                    // Refresh Stream with new subscription
                     viewTweets.loadTweets();
                 },
                 error: function(data) {
@@ -99,6 +100,8 @@ $(function(){
                         if (self.collection.models.length === 0) {
                             $('#no_subscriptions').show();
                         }
+
+                        viewTweets.removeSubscription(subscription);
                     }}).fadeOut();
                 },
                 error: function(data) {

@@ -469,6 +469,9 @@ class User
         $subscriptions->setUser($this);
         $this->subscriptions[] = $subscriptions;
 
+        // Here we don't increase the nb_subscription of the user because we make it in StreamService to test
+        // if there are new subscriptions since the last loading.
+
         return $this;
     }
 

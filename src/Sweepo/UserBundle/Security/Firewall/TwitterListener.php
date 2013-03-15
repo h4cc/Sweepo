@@ -53,7 +53,6 @@ class TwitterListener implements ListenerInterface
     public function handle(GetResponseEvent $event)
     {
         if (null !== $this->securityContext->getToken()) {
-
                 $twitterUserToken = new TwitterUserToken();
                 $twitterUserToken->setTwitterToken($this->securityContext->getToken()->getUser()->getToken());
                 $twitterUserToken->setTwitterTokenSecret($this->securityContext->getToken()->getUser()->getTokenSecret());

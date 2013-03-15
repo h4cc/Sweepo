@@ -77,7 +77,12 @@ class ApiSubscriptionController extends Controller
             break;
 
             case 'DELETE':
+                $subscriptions = $this->getUser()->getNbSubscriptions();
+                $subscriptions = $subscriptions - 1;
+                $this->getUser()->setNbSubscriptions($subscriptions);
+
                 $em->remove($subscription);
+                $em->persist($this->getUser());
                 $em->flush();
 
                 return $this->get('sweepo.api.response')->successResponse([]);

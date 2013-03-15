@@ -18,6 +18,9 @@ $(function () {
               return -tweet.get("tweet_id");
             };
             this.template = _.template($('#tweet_template').html());
+            this.template_no_tweets = _.template($('#no_tweet_template').html());
+            this.template_tweets_loading = _.template($('#tweet_loading_template').html());
+
             this.fetchTweets();
         },
 
@@ -28,15 +31,20 @@ $(function () {
         fetchTweets : function () {
             var self = this;
 
+            // Loading informations
+            $('#tweets').html(this.template_tweets_loading());
+
             $.ajax({
                 type : 'GET',
                 url: Routing.generate('api_tweets') + '?token=' + core_data.user_api_key,
                 success: function(data) {
                     self.collection.add(data.success);
                     self.render();
+                    self.loadTweets();
                 },
                 error: function(data) {
                     $('#loading_tweets').hide();
+                    self.render();
                 }
             });
         },
@@ -48,7 +56,12 @@ $(function () {
 
         loadTweets : function () {
             var self = this;
+
+            // Loading informations
             $('#loading_tweets').show();
+            if (this.collection.models.length === 0) {
+                $('#tweets').html(this.template_tweets_loading());
+            }
 
             $.ajax({
                 type : 'GET',
@@ -64,12 +77,22 @@ $(function () {
             });
         },
 
+        removeSubscription : function(subscription) {
+            var models = this.collection.where({subscription_keyword : subscription.get('subscription')});
+            this.collection.remove(models);
+            this.render();
+        },
+
         render : function() {
-            console.log(this.collection.toJSON());
-            var renderedContent = this.template({ tweets : this.collection.toJSON() });
-            $('#loading_tweets').hide();
-            $('#tweets').html(renderedContent);
-            $('.hightlight').tooltip();
+            if (this.collection.models.length !== 0) {
+                var renderedContent = this.template({ tweets : this.collection.toJSON() });
+                $('#loading_tweets').hide();
+                $('#tweets').html(renderedContent);
+                $('.hightlight').tooltip();
+            } else {
+                $('#tweets').html(this.template_no_tweets());
+            }
+
             return this;
         }
     });

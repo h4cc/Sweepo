@@ -33,6 +33,7 @@ add_subscription: "Ajoutez un abonnement"
 no_subscriptions: "Il n'y a pas d'abonnements"
 retweeted_by: "Retweeté par"
 open_on: "Ouvrir sur"
+no_tweets: "Aucuns tweets trouvés"
 
 # Mailing
 daily_email_subject: "Les nouvelles journalières de votre flux"

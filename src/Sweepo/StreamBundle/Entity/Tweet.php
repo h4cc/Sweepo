@@ -143,6 +143,7 @@ class Tweet
             'is_retweeted'            => $this->is_retweeted,
             'raw_user_screen_name'    => $this->raw_user_screen_name,
             'raw_user_name'           => $this->raw_user_name,
+            'subscription_keyword'    => $this->subscription->getSubscription(),
         ];
 
         if (!$short) {

@@ -33,6 +33,7 @@ add_subscription: "Add a subscription"
 no_subscriptions: "There are no subscriptions"
 retweeted_by: "Retweeted by"
 open_on: "Open on"
+no_tweets: "No tweets found"
 
 # Mailing
 daily_email_subject: "Daily news in your stream"

@@ -19,7 +19,7 @@ class SiteController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if (null !== $this->get('security.context')->getToken()) {
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
             return $this->redirect($this->generateUrl('stream'));
         }
 
@@ -32,7 +32,7 @@ class SiteController extends Controller
      */
     public function createAction(Request $request)
     {
-        if (null !== $this->get('security.context')->getToken()) {
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
             return $this->redirect($this->generateUrl('stream'));
         }
 

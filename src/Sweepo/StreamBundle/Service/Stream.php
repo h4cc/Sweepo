@@ -34,17 +34,19 @@ class Stream
 
     public function getStream(User $user)
     {
-        $this->fetchTweetsFromTwitter($user);
-
         return $this->em->getRepository('SweepoStreamBundle:Tweet')->getStream($user);
     }
 
     public function fetchTweetsFromTwitter(User $user)
     {
         $subscriptions = $this->em->getRepository('SweepoStreamBundle:Subscription')->findBy(['user' => $user]);
+
+        // By default, the count parameter is 200
         $parameters = ['count' => 200];
 
-        // If we have added a new subscriptions or we have 0 subscriptions
+        // If we have NOT added a new subscriptions
+        // We pass since_id parameter to the query to Twitter to get all tweets since our last loading
+        // To improvment the speed of the Twitter query
         if (count($subscriptions) === $user->getNbSubscriptions()) {
             $id = $this->em->getRepository('SweepoStreamBundle:Tweet')->getLastId($user);
 
@@ -53,7 +55,10 @@ class Stream
             }
         }
 
+        // Here we save the real number of subscriptions
         $user->setNbSubscriptions(count($subscriptions));
+
+        // Twitter request
         $tweetsRetrieved = $this->twitter->get('statuses/home_timeline', $parameters, $user->getToken(), $user->getTokenSecret());
         $tweetsRetrieved = array_reverse($tweetsRetrieved);
 
