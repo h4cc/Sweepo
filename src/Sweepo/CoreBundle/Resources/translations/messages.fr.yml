@@ -6,6 +6,12 @@ add: "Ajouter"
 added: "ajouté !"
 delete: "Supprimer"
 loading: "chargement"
+cancel: "annuler"
+
+# Account
+account_edit : "Editez votre compte"
+account_delete : "Supprimez votre compte"
+account_confirm : "Etes-vous sur ?"
 
 # Months
 january: "janvier"

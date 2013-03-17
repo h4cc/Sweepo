@@ -54,13 +54,23 @@
                         </li>
                     </ul>
 
-                    <!-- Manager account -->
-                    <div id="disconnect_user">
-                        <a id="disconnect_toggle" href="#">
-                            <i class="icon icon-off"></i>
-                        </a>
-                        <a href="{{ path('logout') }}" id="disconnect" class="btn btn-primary">{{ 'logout' | trans }}</a>
-                    </div>
+                    <!-- User account -->
+                    <ul id="account_user" class="nav">
+                        <li class="dropdown">
+                            <a id="handle_account" class="dropdown-toggle area_dropdown" role="button" data-toggle="dropdown" href="#">
+                                <i class="icon icon-cog"></i>
+                                <i class="icon icon-caret-down"></i>
+                            </a>
+                            <ul id="dropdown_user" class="dropdown-menu pull-right" role="menu" aria-labelledby="handle_account">
+                                <li>
+                                    <a href="{{ path('user_edit') }}"><i class="icon icon-pencil"></i> {{ 'account_edit' | trans }}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('logout') }}"><i class="icon icon-off"></i> {{ 'logout' | trans }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

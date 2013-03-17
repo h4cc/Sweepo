@@ -1,0 +1,35 @@
+{% extends 'SweepoSiteBundle:Layouts:layout.html.twig' %}
+
+{% block container %}
+    <div id="container_introduction">
+        <h1>Ne ratez plus jamais ce qui se dit</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+        </p>
+    </div>
+    <div id="form_create">
+        <div id="background_form_create"></div>
+        <img src="{{ profile_picture }}" heigth="57px" width="57px" class="img-rounded"/>
+        <h2>{{ name }}</h2>
+        <form action="" method="post" {{ form_enctype(form) }}>
+            <p>
+                {{ form_widget(form) }}
+            </p>
+            <p>
+                <button class="btn btn-primary">Create</button>
+            </p>
+        </form>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets
+        'front/less/UserBundle/user.less'
+        filter='less,?yui_css'
+    %}
+
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}

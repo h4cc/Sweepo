@@ -1,0 +1,84 @@
+@import "../SiteBundle/main.less";
+
+#container_up {
+
+    #container_introduction {
+        width:500px;
+        position:absolute;
+        left:50%;
+        margin-left:-40%;
+        top:140px;
+
+        h1 {
+            color:@white;
+            .text-shadow(#000);
+        }
+
+        p {
+            margin-top:25px;
+            color:@white;
+            font-size:18px;
+            letter-spacing: 1.6px;
+        }
+
+        p:last-child {
+            margin-top:45px;
+        }
+    }
+
+    #form_create {
+        width:360px;
+        height:180px;
+        margin-top:110px;
+        position:absolute;
+        right:50%;
+        margin-right:-40%;
+        padding:20px;
+
+        img {
+            position: absolute;
+        }
+
+        h2 {
+            color:@text;
+            .text-shadow();
+            position:absolute;
+            top:17px;
+            left:94px;
+        }
+
+        form {
+            position: absolute;
+            top:78px;
+            left:10px;
+
+            label {
+                margin-left: 10px;
+            }
+
+            input[type="text"] {
+                height: 30px;
+                width: 340px;
+                margin-left: 10px;
+                margin-bottom: 8px;
+                font-size: 20px;
+            }
+
+            p:last-child {
+                text-align:right;
+            }
+        }
+    }
+
+    #background_form_create {
+        width:100%;
+        height:100%;
+        background:@white;
+        opacity:0.90;
+        filter:alpha(opacity=90);
+        .border-radius();
+        position:absolute;
+        top:0;
+        left:0;
+    }
+}

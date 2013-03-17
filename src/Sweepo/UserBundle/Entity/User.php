@@ -5,6 +5,7 @@ namespace Sweepo\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Sweepo\StreamBundle\Entity\Subscription;
 use Sweepo\StreamBundle\Entity\Tweet;
@@ -31,6 +32,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="email", unique=true, type="string", length=255)
+     * @Assert\Email(message="Please use a valid email adress")
      */
     private $email;
 
@@ -98,12 +100,12 @@ class User
     private $api_key;
 
     /**
-     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Tweet", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Tweet", mappedBy="user", cascade={"all"})
      */
     private $tweets;
 
     /**
-     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Subscription", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Subscription", mappedBy="user", cascade={"all"})
      */
     private $subscriptions;
 
