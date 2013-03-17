@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use Sweepo\StreamBundle\Entity\Tweet;
+use Sweepo\StreamBundle\Entity\Subscription;
 
 class StreamController extends Controller
 {
@@ -18,8 +19,22 @@ class StreamController extends Controller
      */
     public function streamAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $subscriptions = $em->getRepository('SweepoStreamBundle:Subscription')->findBy(['user' => $this->getUser()]);
+        $subscriptionsTypes = Subscription::getTypes();
+        $countSubscriptionsType = [];
+
+        foreach ($subscriptionsTypes as $type) {
+            $countSubscriptionsType[$type] = 0;
+        }
+
+        foreach ($subscriptions as $subscription) {
+            $countSubscriptionsType[$subscription->getType()]++;
+        }
+
         return [
-            'user' => $this->getUser(),
+            'count_subscription' => $countSubscriptionsType,
+            'user'               => $this->getUser(),
         ];
     }
 }

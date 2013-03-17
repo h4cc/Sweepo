@@ -18,7 +18,13 @@
         <p class="screen_name">@{{ user.screenName }}</p>
     </div>
     <div id="subscriptions">
-        <div id="title_subscriptions" class="h2">{{ 'subscriptions' | trans }}</div>
+        <div id="title_subscriptions" class="h2">
+            {{ 'subscriptions' | trans }}
+        </div>
+        <div id="infos_subscriptions">
+            <i class="icon icon-user icon-margin"></i>{{ count_subscription.user }}&nbsp;
+            <i class="icon icon-comment icon-margin"></i>{{ count_subscription.keyword }}
+        </div>
         <form>
             <input id="input_subscription" type="text" placeholder="{{ 'add_subscription' | trans }}" style="{% if user.local == 'fr' %}width:184px;{% else %}width:204px{% endif %}" />
             <button id="submit_subscription" class="btn btn-success"><i class="icon icon-plus icon-margin"></i>{{ 'add' | trans }}</button>

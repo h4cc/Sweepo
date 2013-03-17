@@ -146,6 +146,14 @@ class Subscription
         return $this->type;
     }
 
+    static function getTypes()
+    {
+        return [
+            self::TYPE_KEYWORD,
+            self::TYPE_USER,
+        ];
+    }
+
     /**
      * Set created_at
      *
