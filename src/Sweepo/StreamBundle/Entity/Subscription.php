@@ -23,7 +23,7 @@ class Subscription
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var User
@@ -31,33 +31,33 @@ class Subscription
      * @ORM\ManyToOne(targetEntity="Sweepo\UserBundle\Entity\User", inversedBy="subscriptions", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user;
+    protected $user;
 
     /**
      * @var string
      *
      * @ORM\Column(name="subscription", type="string", length=255)
      */
-    private $subscription;
+    protected $subscription;
 
     /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
      */
-    private $type;
+    protected $type;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Tweet", mappedBy="subscription", cascade={"remove"})
      */
-    private $tweets;
+    protected $tweets;
 
     public function __construct()
     {

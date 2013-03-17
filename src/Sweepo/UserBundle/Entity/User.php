@@ -26,7 +26,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -34,87 +34,87 @@ class User
      * @ORM\Column(name="email", unique=true, type="string", length=255)
      * @Assert\Email(message="Please use a valid email adress")
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="token", type="string", length=255)
      */
-    private $token;
+    protected $token;
 
     /**
      * @var string
      *
      * @ORM\Column(name="token_secret", type="string", length=255)
      */
-    private $token_secret;
+    protected $token_secret;
 
     /**
      * @var string
      *
      * @ORM\Column(name="screen_name", type="string", length=255)
      */
-    private $screen_name;
+    protected $screen_name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="twitter_id", type="integer")
      */
-    private $twitter_id;
+    protected $twitter_id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="profile_image_url", type="string", length=255)
      */
-    private $profile_image_url;
+    protected $profile_image_url;
 
     /**
      * @var string
      *
      * @ORM\Column(name="local", type="string", length=255)
      */
-    private $local;
+    protected $local;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * @var string
      *
      * @ORM\Column(name="api_key", type="string", length=255)
      */
-    private $api_key;
+    protected $api_key;
 
     /**
      * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Tweet", mappedBy="user", cascade={"all"})
      */
-    private $tweets;
+    protected $tweets;
 
     /**
      * @ORM\OneToMany(targetEntity="Sweepo\StreamBundle\Entity\Subscription", mappedBy="user", cascade={"all"})
      */
-    private $subscriptions;
+    protected $subscriptions;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nb_subscriptions", type="integer", length=255)
      */
-    private $nb_subscriptions = 0;
+    protected $nb_subscriptions = 0;
 
     public function __toString()
     {

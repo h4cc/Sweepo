@@ -21,7 +21,7 @@ class Tweet
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -29,91 +29,91 @@ class Tweet
      * @ORM\ManyToOne(targetEntity="Sweepo\UserBundle\Entity\User", inversedBy="tweets")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user;
+    protected $user;
 
     /**
      * @var bigint
      *
      * @ORM\Column(name="tweet_id", type="bigint")
      */
-    private $tweet_id;
+    protected $tweet_id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="text", type="string", length=255)
      */
-    private $text;
+    protected $text;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="tweet_created_at", type="datetime")
      */
-    private $tweet_created_at;
+    protected $tweet_created_at;
 
     /**
      * @var string
      *
      * @ORM\Column(name="in_reply_to_screen_name", type="string", length=255, nullable=true)
      */
-    private $in_reply_to_screen_name;
+    protected $in_reply_to_screen_name;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="owner_id", type="integer")
      */
-    private $owner_id;
+    protected $owner_id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="owner_name", type="string", length=255)
      */
-    private $owner_name;
+    protected $owner_name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="owner_screen_name", type="string", length=255)
      */
-    private $owner_screen_name;
+    protected $owner_screen_name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="owner_profile_image_url", type="string", length=255)
      */
-    private $owner_profile_image_url;
+    protected $owner_profile_image_url;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_retweeted", type="boolean")
      */
-    private $is_retweeted = false;
+    protected $is_retweeted = false;
 
     /**
      * @var string
      *
      * @ORM\Column(name="raw_user_screen_name", type="string", length=255, nullable=true)
      */
-    private $raw_user_screen_name;
+    protected $raw_user_screen_name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="raw_user_name", type="string", length=255, nullable=true)
      */
-    private $raw_user_name;
+    protected $raw_user_name;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * @var string
@@ -121,7 +121,7 @@ class Tweet
      * @ORM\ManyToOne(targetEntity="Sweepo\StreamBundle\Entity\Subscription", inversedBy="tweets")
      * @ORM\JoinColumn(name="subscription_id", referencedColumnName="id")
      */
-    private $subscription;
+    protected $subscription;
 
     public function __construct()
     {
