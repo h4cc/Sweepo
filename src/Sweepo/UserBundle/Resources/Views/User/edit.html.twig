@@ -13,14 +13,18 @@
         <div id="background_form_create"></div>
         <img src="{{ profile_picture }}" heigth="57px" width="57px" class="img-rounded"/>
         <h2>{{ name }}</h2>
-        <form action="" method="post" {{ form_enctype(form) }}>
+        <form action="" method="post" {{ form_enctype(form) }} class="clearfix">
             <p>
                 {{ form_widget(form) }}
             </p>
             <p>
-                <button class="btn btn-primary">{{ 'account_edit' | trans }}</button> <a href="{{ path('user_delete') }}" class="btn btn-danger warning" id="delete_account" data-confirm="{{ 'account_confirm' | trans }}">{{ 'account_delete' | trans }}</a>
+                <a href="{{ path('stream') }}">{{ 'cancel' | trans | title }}</a>&nbsp;
+                <button class="btn btn-primary"><i class="icon icon-pencil icon-margin"></i> {{ 'account_edit' | trans }}</button>
             </p>
         </form>
+        <div id="delete_area">
+            <a href="{{ path('user_delete') }}" class="btn btn-danger warning" id="delete_account" data-confirm="{{ 'account_confirm' | trans }}"><i class="icon icon-ban-circle icon-margin"></i>  {{ 'account_delete' | trans }}</a>
+        </div>
     </div>
 {% endblock %}
 
@@ -38,7 +42,7 @@
 
 {% block stylesheets %}
     {% stylesheets
-        'front/less/SiteBundle/create.less'
+        'front/less/UserBundle/edit.less'
         filter='less,?yui_css'
     %}
 

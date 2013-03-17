@@ -6,6 +6,7 @@ add: "Add"
 added: "added !"
 delete: "Delete"
 loading: "loading"
+cancel: "cancel"
 
 # Account
 account_edit : "Edit your account"
