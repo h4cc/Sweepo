@@ -64,6 +64,7 @@ class Mailer
         $this->mandrill->setSubject($this->translator->trans('daily_email_subject', [], 'messages', $user->getLocal()));
         $this->mandrill->setTo($user->getEmail());
         $this->mandrill->setFrom('daily@sweepo.fr', 'Sweepo');
-        $this->mandrill->send();
+        $response = $this->mandrill->send();
+        $this->mandrill->clean();
     }
 }
