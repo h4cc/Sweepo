@@ -27,7 +27,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        ["SweepoCoreBundle", "SweepoStreamBundle", "SweepoSiteBundle"]
+    bundles:        ["SweepoCoreBundle", "SweepoStreamBundle", "SweepoSiteBundle", "SweepoUserBundle"] #Si tu supprimes la ligne ça prend tous les bundles. <3
     java: /usr/bin/java
     filters:
         less:
