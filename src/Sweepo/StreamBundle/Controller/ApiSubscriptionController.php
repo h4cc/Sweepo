@@ -40,7 +40,7 @@ class ApiSubscriptionController extends Controller
             break;
 
             case 'POST':
-                $subscription = $request->request->get('subscription', null);
+                $subscription = trim($request->request->get('subscription', null));
 
                 if (null === $subscription) {
                     return $this->get('sweepo.api.response')->errorResponse('Subscription is a missing mandatory parameter', ErrorCode::INVALID_PARAMETER, 400);
