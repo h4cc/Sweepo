@@ -10,7 +10,7 @@ parameters:
     mailer_host:       localhost
     mailer_user:       ~
     mailer_password:   ~
-    mandrill_api_key:  2804ca70-d8a8-4c52-aac3-2ec7d56a457d
+    mandrill_api_key:  sdfksdhbfgksdfgksdg-sbdfgbksdfhgdsfg
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
@@ -20,7 +20,7 @@ parameters:
     node_modules_path: /usr/local/share/npm/lib/node_modules #/usr/local/share/npm/lib/node_modules/less
     jar_file: /Resources/java/yuicompressor-2.4.7.jar
 
-    consumer_key: ImVoQj3CacBycRQQ07GVQ
-    consumer_secret: jU0whKNIrB9s93FrCTsopesZ2mjg4tZcneSmDNUG0
+    consumer_key: dfsdfqsdfqsdf
+    consumer_secret: qdfqsdfqdsfqdsf
 
     twitter_callback: http://sweepo.dev/app_dev.php/login-check
