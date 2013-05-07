@@ -36,7 +36,7 @@ before_script:
   - cp .travis/app.php web/app.php
   #- cp .travis/behat.yml behat.yml
   - cp .travis/config_prod.yml app/config/config_prod.yml
-  - cp .travis/parameters.yml app/config/parameters.yml
+  - cat .travis/parameters.yml | sed -e "s~PATH~`pwd`~g" | sed -e "s~NODE_VERSION~`node -v`~g" | tee app/config/parameters.yml &> /dev/null
 
   # install composer
   - wget http://getcomposer.org/composer.phar > /dev/null
