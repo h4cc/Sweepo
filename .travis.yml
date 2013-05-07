@@ -7,20 +7,26 @@ env:
   - SYMFONY_VERSION="2.2.*" DB=mysql
 
 before_install:
-  # install apache : tip from https://gist.github.com/3123962
-  - sudo apt-get install -y apache2 > /dev/null
-  - sudo a2enmod actions > /dev/null
-  - sudo a2enmod rewrite > /dev/null
-  - sudo a2enmod headers > /dev/null
-  - echo "ServerName localhost" | sudo tee -a /etc/apache2/httpd.conf > /dev/null
-  - echo "export PATH=/home/vagrant/.phpenv/bin:$PATH" | sudo tee -a /etc/apache2/envvars > /dev/null
-  - cat .travis/phpconfig | sudo tee /etc/apache2/conf.d/phpconfig > /dev/null
-  - cat .travis/virtualhost | sed -e "s~PATH~`pwd`~g" | sudo tee /etc/apache2/sites-available/default > /dev/null
-  - sudo service apache2 restart > /dev/null
+  # apt-get installs
+  - sudo apt-get update &> /dev/null
+  - sudo apt-get install -y apache2 &> /dev/null
+
+  # configure apache : tip from https://gist.github.com/3123962
+  - sudo a2enmod actions &> /dev/null
+  - sudo a2enmod rewrite &> /dev/null
+  - sudo a2enmod headers &> /dev/null
+  - echo "ServerName localhost" | sudo tee -a /etc/apache2/httpd.conf &> /dev/null
+  - echo "export PATH=/home/vagrant/.phpenv/bin:$PATH" | sudo tee -a /etc/apache2/envvars &> /dev/null
+  - cat .travis/phpconfig | sudo tee /etc/apache2/conf.d/phpconfig &> /dev/null
+  - cat .travis/virtualhost | sed -e "s~PATH~`pwd`~g" | sudo tee /etc/apache2/sites-available/default &> /dev/null
+  - sudo service apache2 restart &> /dev/null
   - mysql -e 'create database sweepo_test;'
 
+  # add some php.in config
+  - phpenv config-add .travis/config.ini
+
   # node, npm
-  - npm install -g less@1.3.0 > /dev/null
+  - npm install -g less &> /dev/null
 
 before_script:
   # basic config

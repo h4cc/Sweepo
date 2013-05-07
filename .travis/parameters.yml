@@ -17,9 +17,9 @@ parameters:
     locale:            en
     secret:            GFE45Y456RHYRTYUHEhdfghryUT67RsdfhryU67TR6YETTGDTUrurTDHR56TDHFGBV
 
-    node_base_path: /home/travis/.nvm/v0.8.14/bin/node
-    node_lib_path: /home/travis/.nvm/v0.8.14/bin/node
-    node_modules_path: /home/travis/.nvm/v0.8.14/lib/node_modules
+    node_base_path: /home/travis/.nvm/NODE_VERSION/bin/node
+    node_lib_path: /home/travis/.nvm/NODE_VERSION/bin/node
+    node_modules_path: /home/travis/.nvm/NODE_VERSION/lib/node_modules
     jar_file: /Resources/java/yuicompressor-2.4.7.jar
 
     consumer_key: fgsdfgfsdgsfdgsdfgsfdg
