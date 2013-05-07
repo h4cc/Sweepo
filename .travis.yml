@@ -27,6 +27,7 @@ before_install:
 
   # node, npm
   - npm install -g less &> /dev/null
+  - npm install -g bower
 
 before_script:
   # basic config
@@ -44,6 +45,9 @@ before_script:
 
   # mysql
   #- bin/create_database.sh test
+
+  # Bower
+  - bower install
 
   # assetic
   - app/console assetic:dump --force

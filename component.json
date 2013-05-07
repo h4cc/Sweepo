@@ -2,7 +2,7 @@
   "name": "Sweepo",
   "version": "0.0.0",
   "dependencies": {
-    "jquery": "~1.8.3",
+    "jquery": "1.9.1",
     "jquery-ui": "~1.9.2",
     "bootstrap": "~2.2.2",
     "font-awesome": "~3.0",
