@@ -34,7 +34,7 @@ before_script:
 
   # install composer
   - wget http://getcomposer.org/composer.phar > /dev/null
-  - php composer.phar install --dev --prefer-source
+  - php composer.phar update --dev --prefer-source
 
   # mysql
   - bin/create_database.sh test
