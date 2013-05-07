@@ -12,6 +12,7 @@ parameters:
     mailer_host:       localhost
     mailer_user:       ~
     mailer_password:   ~
+    mandrill_api_key:  72bL7xFONPTLC6th-3IXag
 
     locale:            en
     secret:            GFE45Y456RHYRTYUHEhdfghryUT67RsdfhryU67TR6YETTGDTUrurTDHR56TDHFGBV
@@ -20,3 +21,8 @@ parameters:
     node_lib_path: /home/travis/.nvm/v0.8.14/bin/node
     node_modules_path: /home/travis/.nvm/v0.8.14/lib/node_modules
     jar_file: /Resources/java/yuicompressor-2.4.7.jar
+
+    consumer_key: fgsdfgfsdgsfdgsdfgsfdg
+    consumer_secret: sfgsdfgsfdgsdfgsdfgsfdg
+
+    twitter_callback: http://sweepo.dev/app_dev.php/login-check
