@@ -37,7 +37,7 @@ before_script:
   - php composer.phar update --dev --prefer-source
 
   # mysql
-  - bin/create_database.sh test
+  #- bin/create_database.sh test
 
   # assetic
   - app/console assetic:dump --force
