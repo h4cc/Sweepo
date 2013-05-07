@@ -1,0 +1,8 @@
+imports:
+    - { resource: config.yml }
+
+doctrine:
+    dbal:
+        connections:
+            default:
+                dbname:   %database_test%

@@ -1,0 +1,22 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     sweepo_dev
+    database_dev:      sweepo_dev
+    database_test:     sweepo_test
+    database_user:     root
+    database_password: ~
+
+    mailer_transport:  smtp
+    mailer_host:       localhost
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+    secret:            GFE45Y456RHYRTYUHEhdfghryUT67RsdfhryU67TR6YETTGDTUrurTDHR56TDHFGBV
+
+    node_base_path: /home/travis/.nvm/v0.8.14/bin/node
+    node_lib_path: /home/travis/.nvm/v0.8.14/bin/node
+    node_modules_path: /home/travis/.nvm/v0.8.14/lib/node_modules
+    jar_file: /Resources/java/yuicompressor-2.4.7.jar

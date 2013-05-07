@@ -1,0 +1,11 @@
+# PHPENV Setup
+
+ScriptAlias /phpenv "/home/vagrant/.phpenv/shims"
+
+<Directory "/home/vagrant/.phpenv/shims/">
+    Order allow,deny
+    Allow from all
+</Directory>
+
+AddType application/x-httpd-php5 .php
+Action application/x-httpd-php5 "/phpenv/php-cgi"
