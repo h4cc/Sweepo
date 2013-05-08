@@ -13,7 +13,7 @@
 - Install components via Bower :
 
 ```bash
-    ./bin/bower_init.sh
+    bower install
 ```
 
 - Composer :
