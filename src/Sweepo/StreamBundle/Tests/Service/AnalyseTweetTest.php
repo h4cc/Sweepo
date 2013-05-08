@@ -15,7 +15,7 @@ class AnalyseTweetTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerIsSubscribed
      */
-    public function testIsSubscribed($subscriptions, $tweet, $exepected)
+    public function testIsSubscribed($subscriptions, $tweet)
     {
         $createTweet = $this->getMockBuilder('Sweepo\StreamBundle\Service\CreateTweet')
                      ->disableOriginalConstructor()
@@ -25,16 +25,17 @@ class AnalyseTweetTest extends \PHPUnit_Framework_TestCase
         $answer = $analyse->isSubscribed($subscriptions, $tweet);
 
         $this->assertInstanceOf('Sweepo\StreamBundle\Entity\Subscription', $answer);
-        $this->assertEquals($subscriptions[0]->getSubscription(), $answer->getSubscription());
     }
 
     public function providerIsSubscribed()
     {
         return [
             // Test that we find the user type subscription 'foo'
-            [[$this->addSubscription('@foo', '@foo')], $this->addTweetFromTwitter('foo', 'bar'), true],
+            [[$this->addSubscription('@foo', '@foo')], $this->addTweetFromTwitter('foo', 'bar')],
+            // Test that we find the user type subscription 'foo'
+            [[$this->addSubscription('@foo', '@foo'), $this->addSubscription('@bar', '@bar')], $this->addTweetFromTwitter('bar', 'bar')],
             // Test we find keyword subscription
-            [[$this->addSubscription('bar', 'bar')], $this->addTweetFromTwitter('baz', 'The Bar is better than Foo'), true],
+            [[$this->addSubscription('bar', 'bar')], $this->addTweetFromTwitter('baz', 'The Bar is better than Foo')],
         ];
     }
 

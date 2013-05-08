@@ -50,7 +50,7 @@ class AnalyseTweet
                         return $subscription;
                     }
 
-                    break;
+                break;
 
                 case Subscription::TYPE_KEYWORD:
                     $text = strtolower($tweet->text);
@@ -59,11 +59,11 @@ class AnalyseTweet
                         return $subscription;
                     }
 
-                    break;
+                break;
             }
-
-            return false;
         }
+
+        return false;
     }
 
     /**
