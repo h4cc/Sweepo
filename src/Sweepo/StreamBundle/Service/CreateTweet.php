@@ -27,36 +27,44 @@ class CreateTweet
     {
         $rawTweet = $this->textHandler($rawTweet, $subscription);
 
-        $tweet = new Tweet();
-
-        $tweet->setSubscription($subscription);
-        $tweet->setTweetId($rawTweet->id);
-
-        $tweetCreatedAt = new \DateTime($rawTweet->created_at);
-        $tweetCreatedAt->add(new \DateInterval('PT1H'));
-        $tweet->setTweetCreatedAt($tweetCreatedAt);
-
-        $tweet->setInReplyToScreenName($rawTweet->in_reply_to_screen_name); // TODO
-        $tweet->setCreatedAt(new \DateTime());
-        $tweet->setIsRetweeted(false);
-        $tweet->setText($rawTweet->text);
-        $tweet->setOwnerId($rawTweet->user->id);
-        $tweet->setOwnerName($rawTweet->user->name);
-        $tweet->setOwnerScreenName($rawTweet->user->screen_name);
-        $tweet->setOwnerProfileImageUrl($rawTweet->user->profile_image_url);
+        $tweet = (new Tweet())
+            ->setSubscription($subscription)
+            ->setTweetId($rawTweet->id)
+            ->setTweetCreatedAt($this->getCreatedAtDateTimeFormat($rawTweet->created_at))
+            ->setInReplyToScreenName($rawTweet->in_reply_to_screen_name) // TODO
+            ->setCreatedAt(new \DateTime())
+            ->setIsRetweeted(false)
+            ->setText($rawTweet->text)
+            ->setOwnerId($rawTweet->user->id)
+            ->setOwnerName($rawTweet->user->name)
+            ->setOwnerScreenName($rawTweet->user->screen_name)
+            ->setOwnerProfileImageUrl($rawTweet->user->profile_image_url);
 
         // If is a retweeted tweet
         if (true === $this->isRetweeted($rawTweet)) {
-            $tweet->setIsRetweeted(true);
-            $tweet->setOwnerId($rawTweet->retweeted_status->user->id);
-            $tweet->setOwnerName($rawTweet->retweeted_status->user->name);
-            $tweet->setOwnerScreenName($rawTweet->retweeted_status->user->screen_name);
-            $tweet->setOwnerProfileImageUrl($rawTweet->retweeted_status->user->profile_image_url);
-            $tweet->setRawUserScreenName($rawTweet->user->screen_name);
-            $tweet->setRawUserName($rawTweet->user->name);
+            $tweet->setIsRetweeted(true)
+                ->setOwnerId($rawTweet->retweeted_status->user->id)
+                ->setOwnerName($rawTweet->retweeted_status->user->name)
+                ->setOwnerScreenName($rawTweet->retweeted_status->user->screen_name)
+                ->setOwnerProfileImageUrl($rawTweet->retweeted_status->user->profile_image_url)
+                ->setRawUserScreenName($rawTweet->user->screen_name)
+                ->setRawUserName($rawTweet->user->name);
         }
 
         return $tweet;
+    }
+
+    /**
+     * Create correct DateTime format
+     * @param  string $tweetDateTime the Tweet datetime from Twitter
+     * @return DateTime
+     */
+    private function getCreatedAtDateTimeFormat($tweetDateTime)
+    {
+        $datetime = new \DateTime($tweetDateTime);
+        $datetime->add(new \DateInterval('PT1H'));
+
+        return $datetime;
     }
 
     /**
@@ -67,7 +75,7 @@ class CreateTweet
      */
     private function textHandler($tweet, Subscription $subscription)
     {
-        // Here we remoive the RT mention
+        // Here we remove the RT mention
         if (true === $this->isRetweeted($tweet)) {
             $tweet->text = substr_replace($tweet->text, '', 0, strpos($tweet->text, ':') + 2);
             $tweet->is_retweeted = true;
