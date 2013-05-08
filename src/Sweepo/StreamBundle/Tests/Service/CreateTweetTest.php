@@ -21,16 +21,25 @@ class CreateTweetTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateTweet()
     {
+        $this->translator->expects($this->any())
+                 ->method('trans')
+                 ->will($this->returnValue('Subscription'));
+
         $rawTweet = json_decode($this->getTweet());
 
         $createTweet = new CreateTweet($this->translator);
-        $tweet = $createTweet->createTweet($rawTweet, (new Subscription()));
+        $tweet = $createTweet->createTweet($rawTweet, (new Subscription())->setSubscription('Montpellier')->setType('Montpellier'));
 
         $this->assertEquals(331841255455748096, $tweet->getTweetId());
-        $this->assertEquals('Opportunité de poste dev UX à Montpellier ! via <a href="http://twitter.com/@foo" class="mention">@foo</a> RT, share, tatouez vous le ! <a href="http://t.co/2O8dBawmjC" class="link">http://t.co/2O8dBawmjC</a> <span class="hashtag">#jobs</span> <span class="hashtag">#cdi</span> <span class="hashtag">#ux</span> <span class="hashtag">#js</span> <span class="hashtag">#montpellier</span>', $tweet->getText());
         $this->assertEquals(83561264, $tweet->getOwnerId());
         $this->assertEquals('Nicolas Chenet', $tweet->getOwnerName());
         $this->assertEquals('nicolaschenet', $tweet->getOwnerScreenName());
+
+        // Test if we add correctly the HTML tag on each keyword, mention, etc.
+        $this->assertEquals('Opportunité de poste dev UX à <span class="hightlight" data-toggle="tooltip" data-title="Subscription : Montpellier">Montpellier</span> ! via <a href="http://twitter.com/@foo" class="mention">@foo</a> RT, share, tatouez vous le ! <a href="http://t.co/2O8dBawmjC" class="link">http://t.co/2O8dBawmjC</a> <span class="hashtag">#jobs</span> <span class="hashtag">#cdi</span> <span class="hashtag">#ux</span> <span class="hashtag">#js</span> <span class="hashtag">#montpellier</span>', $tweet->getText());
+
+        // Test if we add correctly 2h from initial hour
+        $this->assertEquals('2013-05-07 20:41:35', $tweet->getTweetCreatedAt()->format('Y-m-d H:i:s'));
     }
 
     private function getTweet()

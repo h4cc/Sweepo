@@ -62,7 +62,7 @@ class CreateTweet
     private function getCreatedAtDateTimeFormat($tweetDateTime)
     {
         $datetime = new \DateTime($tweetDateTime);
-        $datetime->add(new \DateInterval('PT1H'));
+        $datetime->add(new \DateInterval('PT2H'));
 
         return $datetime;
     }
