@@ -64,7 +64,7 @@ class Stream
 
         // Get all the tweet_id to check double
         $arrayTweetsId = $this->em->getRepository('SweepoStreamBundle:Tweet')->getTweetId($user);
-        $tweetsAnalysed = $this->analyse->analyseCollection($tweetsRetrieved, $subscriptions, $arrayTweetsId);
+        $tweetsAnalysed = $this->analyse->analyseTweets($tweetsRetrieved, $subscriptions, $arrayTweetsId);
 
         if (empty($tweetsAnalysed)) {
             $this->em->persist($user);

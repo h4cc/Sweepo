@@ -22,7 +22,7 @@ class AnalyseTweet
      * @param  array $arrayTweetId  This is the array of the actuals tweets id. This is use to detect duplicate tweets
      * @return array                The new tweets fetched by the analyse
      */
-    public function analyseCollection($tweets, $subscriptions, $arrayTweetId)
+    public function analyseTweets($tweets, $subscriptions, $arrayTweetId)
     {
         foreach ($tweets as $tweet) {
             $subscription = $this->isSubscribed($subscriptions, $tweet);
@@ -39,6 +39,12 @@ class AnalyseTweet
         return $this->tweetsSaved;
     }
 
+    /**
+     * Test if there is a subscription for a Tweet
+     * @param  SubscriptionCollection  $subscriptions The subscriptions of the user
+     * @param  stdClass                $tweet         The tweet from Twitter
+     * @return boolean/Subscription
+     */
     public function isSubscribed($subscriptions, $tweet)
     {
         foreach ($subscriptions as $subscription) {
