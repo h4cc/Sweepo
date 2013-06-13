@@ -18,7 +18,6 @@
         "sensio/generator-bundle": "2.1.*",
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
-        "kriswallsmith/assetic": "1.1.*@dev",
         "abraham/twitteroauth": "dev-add-composer-json",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "sensio/buzz-bundle" : "dev-master"
